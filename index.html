@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Revere Detailing | Mobile Automotive Care — DFW Metroplex</title>
   <!-- Preload first hero image for instant display -->
-  <link rel="preload" as="image" href="IMG_7092.jpg" fetchpriority="high"/>
+  <link rel="preload" as="image" href="IMG_7091.jpg" fetchpriority="high"/>
   <!-- Prefetch next slide images -->
-  <link rel="prefetch" as="image" href="IMG_7104.jpg"/>
-  <link rel="prefetch" as="image" href="IMG_7091.jpg"/>
+  <link rel="prefetch" as="image" href="IMG_7078.jpg"/>
+  <link rel="prefetch" as="image" href="IMG_7100.jpg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -45,8 +45,8 @@
     }
     .nav-brand{cursor:pointer;display:flex;flex-direction:column;line-height:1;gap:6px}
     .nav-brand-top{
-      font-family:var(--serif);font-weight:600;font-size:30px;
-      letter-spacing:6px;color:#000;text-transform:uppercase;
+      font-family:var(--nav);font-weight:800;font-size:22px;
+      letter-spacing:5px;color:#000;text-transform:uppercase;
     }
     .nav-brand-sub{
       font-family:var(--cond);font-weight:500;font-size:11px;
@@ -88,10 +88,10 @@
     }
     /* First slide shows instantly — no transition delay */
     #s0{opacity:1;transition:none}
-    #s0 img{object-position:center 70%}
-    #s1 img{object-position:center 35%}
-    #s2 img{object-position:center 50%}
-    #s3 img{object-position:center 35%}
+    #s0 img{object-position:center center}
+    #s1 img{object-position:center 60%}
+    #s2 img{object-position:center center}
+    #s3 img{object-position:center 30%}
     .slide::after{
       content:'';position:absolute;inset:0;
       background:linear-gradient(115deg,rgba(0,0,0,0.84) 0%,rgba(0,0,0,0.35) 52%,rgba(0,0,0,0.05) 100%);
@@ -210,7 +210,7 @@
     /* ══════════ ABOUT SPLIT ══════════ */
     .about-split{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
     .about-split-img{position:relative;overflow:hidden}
-    .about-split-img img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+    .about-split-img img{width:100%;height:100%;object-fit:cover;object-position:center center}
     .about-split-text{background:var(--dark2);padding:96px 80px;display:flex;flex-direction:column;justify-content:center}
 
     /* ══════════ WHY SECTION — LIGHT ══════════ */
@@ -244,17 +244,17 @@
     /* ══════════ FEATURED ══════════ */
     .featured{position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center}
     .feat-bg{position:absolute;inset:0}
-    .feat-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+    .feat-bg img{width:100%;height:100%;object-fit:cover;object-position:center center}
     .feat-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.83)}
     .feat-content{position:relative;z-index:2;padding:100px 80px;max-width:760px}
 
     /* ══════════ SERVICES PAGE ══════════ */
     .page-hero{margin-top:var(--nav-h);padding:80px 80px 60px;background:var(--dark2);border-bottom:var(--border)}
     .svc-blocks{padding:0}
-    .svc-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--border);min-height:560px;overflow:hidden}
+    .svc-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--border);min-height:560px}
     .svc-block:last-child{border-bottom:none}
     .svc-block.flip{direction:rtl}.svc-block.flip>*{direction:ltr}
-    .svc-photo{position:relative;overflow:hidden}
+    .svc-photo{position:relative;overflow:hidden;margin:16px;border-radius:12px}
     .svc-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
     .svc-block:hover .svc-photo img{transform:scale(1.04)}
     .svc-info{background:var(--dark2);padding:60px 64px;display:flex;flex-direction:column;justify-content:center}
@@ -262,7 +262,7 @@
     .svc-feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin-bottom:28px}
     .svc-feats li{font-size:13px;color:var(--grey);padding-left:14px;position:relative}
     .svc-feats li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--red)}
-    .pricing-box{background:#e8e6e3;border:1px solid rgba(0,0,0,0.09);border-left:2px solid var(--red);padding:20px 22px}
+    .pricing-box{background:#e8e6e3;border:1px solid rgba(0,0,0,0.09);border-left:2px solid var(--red);padding:20px 22px;border-radius:8px}
     .pricing-box h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
     .pr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
     .pr:last-child{border-bottom:none}
@@ -281,7 +281,7 @@
     .about-top{margin-top:var(--nav-h);display:grid;grid-template-columns:1fr 1fr;min-height:600px}
     .about-top-text{background:var(--dark2);padding:100px 80px;display:flex;flex-direction:column;justify-content:center}
     .about-top-img{position:relative;overflow:hidden}
-    .about-top-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+    .about-top-img img{width:100%;height:100%;object-fit:cover;object-position:center center}
     .values{background:var(--dark);padding:96px 80px;border-top:var(--border)}
     .vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
     .val{background:#e8e6e3;padding:48px 40px;border-bottom:2px solid transparent;transition:border-color .3s}
@@ -323,7 +323,7 @@
     .foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;padding:64px 80px;border-bottom:1px solid rgba(255,255,255,0.08)}
     .fc{padding-right:36px}
     .foot-brand{margin-bottom:16px}
-    .foot-brand-top{font-family:var(--serif);font-weight:600;font-size:24px;color:#fff;text-transform:uppercase;letter-spacing:5px;display:block}
+    .foot-brand-top{font-family:var(--nav);font-weight:800;font-size:20px;color:#fff;text-transform:uppercase;letter-spacing:5px;display:block}
     .foot-brand-sub{font-family:var(--cond);font-size:9px;letter-spacing:6px;color:var(--red);text-transform:uppercase;display:block;margin-top:5px}
     .fc p{font-size:13px;color:#888;line-height:1.75;max-width:240px;margin-top:14px}
     .fc h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:18px}
@@ -407,7 +407,7 @@
       .page-hero{padding:48px 20px 36px}
       .svc-block{grid-template-columns:1fr}
       .svc-block.flip{direction:ltr}
-      .svc-photo{aspect-ratio:16/9;min-height:unset}
+      .svc-photo{aspect-ratio:4/3;min-height:unset;margin:12px;border-radius:10px}
       .svc-info{padding:36px 20px}
       .svc-info h2{font-size:clamp(20px,7vw,32px)}
       .svc-feats{grid-template-columns:1fr;gap:6px;margin-bottom:20px}
@@ -486,16 +486,16 @@
   <!-- HERO — first image eager loaded -->
   <div class="hero">
     <div class="slide" id="s0">
-      <img src="IMG_7092.jpg" alt="Shelby GT500" fetchpriority="high" decoding="sync" loading="eager"/>
+      <img src="IMG_7091.jpg" alt="Luxury Exterior Detail" fetchpriority="high" decoding="sync" loading="eager"/>
     </div>
     <div class="slide" id="s1">
-      <img src="IMG_7104.jpg" alt="Exotic Supercar" decoding="async" loading="lazy"/>
+      <img src="IMG_7078.jpg" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s2">
-      <img src="IMG_7091.jpg" alt="Luxury Vehicle Detail" decoding="async" loading="lazy"/>
+      <img src="IMG_7100.jpg" alt="Exotic Exterior" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s3">
-      <img src="IMG_7078.jpg" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
+      <img src="IMG_7088.jpg" alt="Sports Car Exterior" decoding="async" loading="lazy"/>
     </div>
     <div class="hero-content">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Mobile Automotive Care &mdash; DFW Metroplex</span></div>
@@ -554,7 +554,7 @@
   <!-- SERVICE PANELS -->
   <div class="svc-panels">
     <div class="svc-panel" onclick="go('services')">
-      <img src="IMG_7070.jpg" alt="Interior Detailing" loading="lazy" style="object-position:center 35%"/>
+      <img src="IMG_7070.jpg" alt="Interior Detailing" loading="lazy" style="object-position:center center"/>
       <div class="svc-panel-inner"><div class="svc-line"></div><h3>Interior Detailing</h3><p>Explore Service</p></div>
     </div>
     <div class="svc-panel" onclick="go('services')">
@@ -601,7 +601,7 @@
 
   <!-- ABOUT SPLIT -->
   <div class="about-split">
-    <div class="about-split-img"><img src="IMG_7082.jpg" alt="Luxury Vehicle Detail" loading="lazy" style="object-position:center 30%"/></div>
+    <div class="about-split-img"><img src="IMG_7082.jpg" alt="Luxury Vehicle Detail" loading="lazy" style="object-position:center center"/></div>
     <div class="about-split-text">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>About Revere</span></div>
       <h2 class="sec-title">Mobile Care<br/>Done Right.</h2>
@@ -696,7 +696,7 @@
   </div>
   <div class="svc-blocks">
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7099.jpg" alt="Express Exterior" loading="lazy" style="object-position:center 30%"/></div>
+      <div class="svc-photo"><img src="IMG_7099.jpg" alt="Express Exterior" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Exterior Service</span></div>
         <h2>Express Exterior</h2>
@@ -705,7 +705,7 @@
       </div>
     </div>
     <div class="svc-block flip">
-      <div class="svc-photo"><img src="IMG_7114.jpg" alt="Full Interior — SUV" loading="lazy" style="object-position:center 30%"/></div>
+      <div class="svc-photo"><img src="IMG_7070.jpg" alt="Porsche Interior" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Interior Service</span></div>
         <h2>Full Interior</h2>
@@ -714,7 +714,7 @@
       </div>
     </div>
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7083.jpg" alt="Standard Package" loading="lazy" style="object-position:center 30%"/></div>
+      <div class="svc-photo"><img src="IMG_7083.jpg" alt="Standard Package" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Most Popular</span></div>
         <h2>Standard Package</h2>
@@ -724,7 +724,7 @@
       </div>
     </div>
     <div class="svc-block flip">
-      <div class="svc-photo"><img src="IMG_7104.jpg" alt="Premium Package" loading="lazy" style="object-position:center 25%"/></div>
+      <div class="svc-photo"><img src="IMG_7104.jpg" alt="Premium Package" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Premium Service</span></div>
         <h2>Premium Package</h2>
@@ -734,7 +734,7 @@
       </div>
     </div>
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7075.jpg" alt="Paint Correction" loading="lazy" style="object-position:center 40%"/></div>
+      <div class="svc-photo"><img src="IMG_7075.jpg" alt="Paint Correction" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Paint Services</span></div>
         <h2>Paint Correction</h2>
@@ -744,7 +744,7 @@
       </div>
     </div>
     <div class="svc-block flip">
-      <div class="svc-photo"><img src="IMG_7086.jpg" alt="Ceramic Coating" loading="lazy" style="object-position:center 30%"/></div>
+      <div class="svc-photo"><img src="IMG_7086.jpg" alt="Ceramic Coating" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Coating Services</span></div>
         <h2>Ceramic &amp;<br/>Graphene</h2>
@@ -918,7 +918,6 @@
       PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
       window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
       const nxt=document.getElementById(id);nxt.classList.add('active');
-      if(id==='gallery')buildGal();
       requestAnimationFrame(()=>requestAnimationFrame(()=>{nxt.classList.add('visible');busy=false}));
     },160);
   }
@@ -989,6 +988,7 @@
     }catch{btn.textContent='Error — Try Again';btn.disabled=false}
   }
 
+  buildGal();
   go('home');
 </script>
 </body>

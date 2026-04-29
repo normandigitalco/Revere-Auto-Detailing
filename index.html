@@ -4,11 +4,12 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Revere Detailing | Mobile Automotive Care — DFW Metroplex</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23111'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-weight='400' font-size='40' fill='%23C9A84C' letter-spacing='-1'%3ER%3C/text%3E%3C/svg%3E"/>
   <!-- Preload first hero image for instant display -->
   <link rel="preload" as="image" href="IMG_7091.jpg" fetchpriority="high"/>
   <!-- Prefetch next slide images -->
   <link rel="prefetch" as="image" href="IMG_7078.jpg"/>
-  <link rel="prefetch" as="image" href="IMG_7100.jpg"/>
+  <link rel="prefetch" as="image" href="IMG_7058.jpg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -88,10 +89,10 @@
     }
     /* First slide shows instantly — no transition delay */
     #s0{opacity:1;transition:none}
-    #s0 img{object-position:center center}
-    #s1 img{object-position:center 60%}
-    #s2 img{object-position:center center}
-    #s3 img{object-position:center 30%}
+    #s0 img{object-position:center 65%}
+    #s1 img{object-position:center 70%}
+    #s2 img{object-position:center 68%}
+    #s3 img{object-position:center 60%}
     .slide::after{
       content:'';position:absolute;inset:0;
       background:linear-gradient(115deg,rgba(0,0,0,0.84) 0%,rgba(0,0,0,0.35) 52%,rgba(0,0,0,0.05) 100%);
@@ -218,7 +219,8 @@
     .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
     .why-card{background:#1a1a1a;padding:48px 40px;border-bottom:2px solid transparent;transition:border-color .3s}
     .why-card:hover{border-color:var(--red)}
-    .why-num{font-family:var(--orb);font-weight:900;font-size:52px;color:rgba(255,255,255,0.05);line-height:1;margin-bottom:16px}
+    .why-num{font-family:var(--serif);font-weight:300;font-size:96px;line-height:1;color:var(--red);letter-spacing:-3px;margin-bottom:0;display:block}
+    .why-rule{width:32px;height:1px;background:var(--red);margin:14px 0 22px;opacity:0.6}
     .why-card h3{font-family:var(--orb);font-weight:700;font-size:13px;text-transform:uppercase;color:#fff;margin-bottom:12px;letter-spacing:1px}
     .why-card p{font-size:14px;color:#999;line-height:1.75}
 
@@ -262,12 +264,15 @@
     .svc-feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin-bottom:28px}
     .svc-feats li{font-size:13px;color:var(--grey);padding-left:14px;position:relative}
     .svc-feats li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--red)}
-    .pricing-box{background:#e8e6e3;border:1px solid rgba(0,0,0,0.09);border-left:2px solid var(--red);padding:20px 22px;border-radius:8px}
-    .pricing-box h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
-    .pr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
-    .pr:last-child{border-bottom:none}
-    .pr span:first-child{font-size:13px;color:var(--grey)}
-    .pr span:last-child{font-family:var(--body);font-weight:600;font-size:15px;color:#111}
+    .pricing-box{background:#fff;border:1px solid rgba(0,0,0,0.09);border-radius:12px;padding:24px 24px 20px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+    .pricing-box-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,0.07)}
+    .pricing-box-label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red)}
+    .pricing-tiers{display:flex;flex-direction:column;gap:8px}
+    .pr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f8f8f6;border-radius:7px;border:1px solid rgba(0,0,0,0.05)}
+    .pr:last-child{border:none}
+    .pr-label{font-family:var(--cond);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#666}
+    .pr-price{font-family:var(--body);font-weight:700;font-size:18px;color:#111;letter-spacing:-0.3px}
+    .pr-price span{font-size:11px;font-weight:400;color:#999;letter-spacing:0}
 
     /* ══════════ GALLERY ══════════ */
     .gal-grid{padding:32px;columns:3;column-gap:8px}
@@ -286,7 +291,8 @@
     .vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
     .val{background:#e8e6e3;padding:48px 40px;border-bottom:2px solid transparent;transition:border-color .3s}
     .val:hover{border-color:var(--red)}
-    .val-num{font-family:var(--orb);font-weight:900;font-size:56px;color:rgba(0,0,0,0.05);line-height:1;margin-bottom:16px}
+    .val-num{font-family:var(--serif);font-weight:300;font-size:96px;line-height:1;color:var(--red);letter-spacing:-3px;display:block}
+    .val-rule{width:32px;height:1px;background:var(--red);margin:14px 0 22px;opacity:0.5}
     .val h3{font-family:var(--orb);font-weight:700;font-size:14px;text-transform:uppercase;color:#111;margin-bottom:12px;letter-spacing:1px}
     .val p{font-size:14px;color:var(--grey);line-height:1.75}
 
@@ -412,7 +418,7 @@
       .svc-info h2{font-size:clamp(20px,7vw,32px)}
       .svc-feats{grid-template-columns:1fr;gap:6px;margin-bottom:20px}
       .svc-feats li{font-size:13px}
-      .pricing-box{padding:16px 18px}
+      .pricing-box{padding:18px 16px}
 
       .gal-grid{padding:12px;columns:2;column-gap:5px}
       .gal-item{margin-bottom:5px}
@@ -492,10 +498,10 @@
       <img src="IMG_7078.jpg" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s2">
-      <img src="IMG_7100.jpg" alt="Exotic Exterior" decoding="async" loading="lazy"/>
+      <img src="IMG_7058.jpg" alt="Black Porsche 911" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s3">
-      <img src="IMG_7088.jpg" alt="Sports Car Exterior" decoding="async" loading="lazy"/>
+      <img src="IMG_7069.jpg" alt="White Mercedes G-Wagon" decoding="async" loading="lazy"/>
     </div>
     <div class="hero-content">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Mobile Automotive Care &mdash; DFW Metroplex</span></div>
@@ -616,9 +622,21 @@
     <div class="rev-eyebrow"><div class="rev-eyebrow-bar"></div><span>Why Revere</span></div>
     <h2 class="sec-title-dark">The Revere<br/>Difference.</h2>
     <div class="why-grid">
-      <div class="why-card"><div class="why-num">01</div><h3>We Come To You</h3><p>No drop-offs, no waiting rooms. We bring professional-grade equipment directly to your driveway — saving you time without sacrificing quality.</p></div>
-      <div class="why-card"><div class="why-num">02</div><h3>Premium Products</h3><p>We use professional-grade chemicals and tools on every job. Your vehicle deserves the best — and that's exactly what we bring every time.</p></div>
-      <div class="why-card"><div class="why-num">03</div><h3>Nothing Missed</h3><p>From wheel wells to the headliner, we treat every vehicle like it's our own — because your satisfaction is our reputation.</p></div>
+      <div class="why-card">
+        <span class="why-num">01</span>
+        <div class="why-rule"></div>
+        <h3>We Come To You</h3><p>No drop-offs, no waiting rooms. We bring professional-grade equipment directly to your driveway — saving you time without sacrificing quality.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">02</span>
+        <div class="why-rule"></div>
+        <h3>Premium Products</h3><p>We use professional-grade chemicals and tools on every job. Your vehicle deserves the best — and that's exactly what we bring every time.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">03</span>
+        <div class="why-rule"></div>
+        <h3>Nothing Missed</h3><p>From wheel wells to the headliner, we treat every vehicle like it's our own — because your satisfaction is our reputation.</p>
+      </div>
     </div>
   </div>
 
@@ -670,9 +688,21 @@
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>What We Stand For</span></div>
     <h2 class="sec-title">The Revere Standard.</h2>
     <div class="vals-grid">
-      <div class="val"><div class="val-num">01</div><h3>Precision</h3><p>Every detail matters. We approach each vehicle with meticulous care, ensuring nothing is overlooked from carpet fibers to the outermost paint surface.</p></div>
-      <div class="val"><div class="val-num">02</div><h3>Convenience</h3><p>Your time is valuable. We bring professional-grade equipment directly to your home or office — no drop-offs, no waiting, no hassle.</p></div>
-      <div class="val"><div class="val-num">03</div><h3>Quality</h3><p>We use only professional-grade products and proven techniques. No shortcuts, no compromises. The result speaks for itself every single time.</p></div>
+      <div class="val">
+        <span class="val-num">01</span>
+        <div class="val-rule"></div>
+        <h3>Precision</h3><p>Every detail matters. We approach each vehicle with meticulous care, ensuring nothing is overlooked from carpet fibers to the outermost paint surface.</p>
+      </div>
+      <div class="val">
+        <span class="val-num">02</span>
+        <div class="val-rule"></div>
+        <h3>Convenience</h3><p>Your time is valuable. We bring professional-grade equipment directly to your home or office — no drop-offs, no waiting, no hassle.</p>
+      </div>
+      <div class="val">
+        <span class="val-num">03</span>
+        <div class="val-rule"></div>
+        <h3>Quality</h3><p>We use only professional-grade products and proven techniques. No shortcuts, no compromises. The result speaks for itself every single time.</p>
+      </div>
     </div>
   </div>
   <div style="background:var(--dark2);padding:96px 80px;border-top:var(--border)">
@@ -701,7 +731,7 @@
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Exterior Service</span></div>
         <h2>Express Exterior</h2>
         <ul class="svc-feats"><li>Wheels &amp; tires cleaned</li><li>Fender wells cleaned</li><li>Foam bath / hand wash</li><li>Tires shined</li><li>Door jambs dried</li><li>Gas compartment</li><li>Spray sealant applied</li></ul>
-        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$75</span></div><div class="pr"><span>Mid-Size SUV</span><span>$90</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$110</span></div></div>
+        <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Sedan / Coupe</span><span class="pr-price">$75</span></div><div class="pr"><span class="pr-label">Mid-Size SUV</span><span class="pr-price">$90</span></div><div class="pr"><span class="pr-label">Full-Size SUV / Truck</span><span class="pr-price">$110</span></div></div></div>
       </div>
     </div>
     <div class="svc-block flip">
@@ -710,7 +740,7 @@
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Interior Service</span></div>
         <h2>Full Interior</h2>
         <ul class="svc-feats"><li>Full vacuum</li><li>Floor mats cleaned</li><li>Windows wiped</li><li>Leather seats cleaned</li><li>Spot cleaning</li><li>Plastic &amp; vinyl trim</li><li>Pedals cleaned</li><li>Scent applied</li></ul>
-        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$130</span></div><div class="pr"><span>Mid-Size SUV</span><span>$155</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$190</span></div></div>
+        <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Sedan / Coupe</span><span class="pr-price">$130</span></div><div class="pr"><span class="pr-label">Mid-Size SUV</span><span class="pr-price">$155</span></div><div class="pr"><span class="pr-label">Full-Size SUV / Truck</span><span class="pr-price">$190</span></div></div></div>
       </div>
     </div>
     <div class="svc-block">
@@ -720,7 +750,7 @@
         <h2>Standard Package</h2>
         <p style="font-size:14px;color:#444;margin-bottom:18px">Complete inside &amp; out — the most popular choice for a full refresh.</p>
         <ul class="svc-feats"><li>Full exterior wash</li><li>Wheel &amp; tire service</li><li>Full interior vacuum</li><li>Windows in &amp; out</li><li>Leather &amp; trim cleaned</li><li>Sealant applied</li><li>Door jambs dried</li><li>Scent applied</li></ul>
-        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$180</span></div><div class="pr"><span>Mid-Size SUV</span><span>$215</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$255</span></div></div>
+        <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Sedan / Coupe</span><span class="pr-price">$180</span></div><div class="pr"><span class="pr-label">Mid-Size SUV</span><span class="pr-price">$215</span></div><div class="pr"><span class="pr-label">Full-Size SUV / Truck</span><span class="pr-price">$255</span></div></div></div>
       </div>
     </div>
     <div class="svc-block flip">
@@ -730,7 +760,7 @@
         <h2>Premium Package</h2>
         <p style="font-size:14px;color:#444;margin-bottom:18px">The full Revere experience — deep cleaning with protection for a showroom result.</p>
         <ul class="svc-feats"><li>Everything in Standard</li><li>Engine bay cleaning</li><li>Clay bar treatment</li><li>Paint decontamination</li><li>Hand wax / sealant</li><li>Interior conditioning</li><li>Premium tire dressing</li><li>Odor elimination</li></ul>
-        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$280</span></div><div class="pr"><span>Mid-Size SUV</span><span>$320</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$375</span></div></div>
+        <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Sedan / Coupe</span><span class="pr-price">$280</span></div><div class="pr"><span class="pr-label">Mid-Size SUV</span><span class="pr-price">$320</span></div><div class="pr"><span class="pr-label">Full-Size SUV / Truck</span><span class="pr-price">$375</span></div></div></div>
       </div>
     </div>
     <div class="svc-block">
@@ -740,7 +770,7 @@
         <h2>Paint Correction</h2>
         <p style="font-size:14px;color:#444;margin-bottom:18px">Remove swirl marks, scratches, water spots, and oxidation — restore your paint's true depth.</p>
         <ul class="svc-feats"><li>Single-stage correction</li><li>Two-stage correction</li><li>Swirl mark removal</li><li>Water spot removal</li><li>Light scratch removal</li><li>Paint depth tested</li></ul>
-        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Single Stage</span><span>$350</span></div><div class="pr"><span>Two Stage</span><span>$550</span></div><div class="pr"><span>Full Correction</span><span>Contact for Quote</span></div></div>
+        <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Single Stage</span><span class="pr-price">$350</span></div><div class="pr"><span class="pr-label">Two Stage</span><span class="pr-price">$550</span></div><div class="pr"><span class="pr-label">Full Correction</span><span class="pr-price" style="font-size:13px">Contact Us</span></div></div></div>
       </div>
     </div>
     <div class="svc-block flip">
@@ -750,7 +780,7 @@
         <h2>Ceramic &amp;<br/>Graphene</h2>
         <p style="font-size:14px;color:#444;margin-bottom:18px">Industry-grade coatings delivering a hydrophobic, self-cleaning surface that protects your investment for years.</p>
         <ul class="svc-feats"><li>Full paint coating</li><li>Wheel coating</li><li>Glass coating</li><li>Interior coating</li><li>Graphene upgrade</li><li>Multi-year protection</li></ul>
-        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>1-Year Ceramic</span><span>$499</span></div><div class="pr"><span>3-Year Ceramic</span><span>$799</span></div><div class="pr"><span>Graphene Coating</span><span>$999+</span></div></div>
+        <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">1-Year Ceramic</span><span class="pr-price">$499</span></div><div class="pr"><span class="pr-label">3-Year Ceramic</span><span class="pr-price">$799</span></div><div class="pr"><span class="pr-label">Graphene Coating</span><span class="pr-price">$999<span>+</span></span></div></div></div>
       </div>
     </div>
   </div>

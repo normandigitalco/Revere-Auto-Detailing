@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Revere Detailing | Mobile Automotive Care — DFW Metroplex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --red:#e8271a;--red2:#ff3322;
+      --black:#000;--dark:#080808;--dark2:#0f0f0f;--dark3:#161616;--dark4:#1e1e1e;
+      --light:#f4f3f1;--light2:#eceae7;--white:#fff;
+      --off:#e2e0dd;--grey:#777;
+      --border:1px solid rgba(255,255,255,0.07);
+      --lborder:1px solid rgba(0,0,0,0.09);
+      --nav-h:88px;
+      --orb:'Orbitron',sans-serif;--cond:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;
+    }
+    html{scroll-behavior:auto}
+    body{background:var(--black);color:var(--off);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden}
+    ::selection{background:var(--red);color:#fff}
+    ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--red)}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    /* ─ TRANSITIONS ─ */
+    .page{display:none;opacity:0;transition:opacity .18s ease}
+    .page.active{display:block}
+    .page.visible{opacity:1}
+
+    /* ─ NAV ─ */
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:var(--nav-h);background:#000;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .nav-brand{cursor:pointer;display:flex;flex-direction:column;line-height:1}
+    .nav-brand-top{font-family:var(--orb);font-weight:800;font-size:20px;letter-spacing:3px;color:#fff;text-transform:uppercase}
+    .nav-brand-sub{font-family:var(--cond);font-weight:400;font-size:10px;letter-spacing:6px;color:var(--red);text-transform:uppercase;margin-top:5px}
+    .nav-links{display:flex;gap:44px;list-style:none;position:absolute;left:50%;transform:translateX(-50%)}
+    .nav-links li a{font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);cursor:pointer;transition:color .2s;position:relative;padding-bottom:4px}
+    .nav-links li a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--red);transition:width .3s}
+    .nav-links li a:hover,.nav-links li a.act{color:#fff}
+    .nav-links li a:hover::after,.nav-links li a.act::after{width:100%}
+    .nav-cta{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;padding:12px 30px;background:var(--red);color:#fff;border:none;transition:background .2s}
+    .nav-cta:hover{background:var(--red2)}
+    .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .ham span{width:24px;height:1.5px;background:#fff;display:block;transition:all .3s}
+    .ham.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+    .ham.open span:nth-child(2){opacity:0}
+    .ham.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+    .mob-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:#000;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:36px}
+    .mob-menu.open{display:flex}
+    .mob-menu a{font-family:var(--orb);font-size:20px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;cursor:pointer}
+    .mob-menu a:hover{color:var(--red)}
+
+    /* ─ HERO ─ */
+    .hero{position:relative;height:100vh;overflow:hidden;margin-top:var(--nav-h)}
+    .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+    .slide.active{opacity:1}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    #s0 img{object-position:center 72%}
+    #s1 img{object-position:center 52%}
+    #s2 img{object-position:center 58%}
+    #s3 img{object-position:center 38%}
+    .slide::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(0,0,0,0.83) 0%,rgba(0,0,0,0.36) 52%,rgba(0,0,0,0.06) 100%)}
+    .hero-content{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:0 80px 90px}
+    .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .eyebrow-bar{width:3px;height:20px;background:var(--red);flex-shrink:0}
+    .eyebrow span{font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red)}
+    .hero-title{font-family:var(--orb);font-weight:900;font-size:clamp(52px,9.5vw,124px);line-height:.88;color:#fff;text-transform:uppercase;letter-spacing:-2px;margin-bottom:30px}
+    .hero-sub{font-family:var(--cond);font-weight:400;font-size:15px;letter-spacing:3px;color:rgba(255,255,255,0.55);margin-bottom:44px;text-transform:uppercase}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+    .btn-red{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;padding:16px 44px;background:var(--red);color:#fff;border:none;transition:background .2s}
+    .btn-red:hover{background:var(--red2)}
+    .btn-ghost{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;padding:16px 44px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.28);transition:border-color .25s}
+    .btn-ghost:hover{border-color:rgba(255,255,255,0.7)}
+    .btn-dark{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;padding:16px 44px;background:#111;color:#fff;border:none;transition:background .2s}
+    .btn-dark:hover{background:var(--red)}
+    .hero-dots{position:absolute;bottom:36px;right:80px;z-index:10;display:flex;gap:8px;align-items:center}
+    .dot{width:28px;height:1.5px;background:rgba(255,255,255,0.2);cursor:pointer;transition:background .3s,width .3s}
+    .dot.on{background:var(--red);width:52px}
+    .h-arr{position:absolute;top:50%;z-index:10;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.1);color:#fff;width:50px;height:50px;cursor:pointer;font-size:26px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .h-arr:hover{background:var(--red);border-color:var(--red)}
+    .h-arr.pv{left:28px}.h-arr.nx{right:28px}
+
+    /* ─ BLACK INFO STRIP ─ */
+    .info-strip{background:var(--dark2);border-top:var(--border);border-bottom:var(--border);display:grid;grid-template-columns:repeat(3,1fr)}
+    .info-strip-item{padding:52px 60px;border-right:var(--border);display:flex;flex-direction:column;gap:10px}
+    .info-strip-item:last-child{border-right:none}
+    .info-strip-item h3{font-family:var(--orb);font-weight:700;font-size:14px;text-transform:uppercase;color:#fff;letter-spacing:1px}
+    .info-strip-item p{font-size:14px;color:var(--grey);line-height:1.7;max-width:300px}
+    .strip-eyebrow{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+
+    /* ─ COMMONS ─ */
+    .sec-title{font-family:var(--orb);font-weight:800;font-size:clamp(28px,4.5vw,64px);text-transform:uppercase;color:#fff;line-height:.95;letter-spacing:-0.5px;margin-top:16px}
+    .sec-title-dark{font-family:var(--orb);font-weight:800;font-size:clamp(28px,4.5vw,64px);text-transform:uppercase;color:#111;line-height:.95;letter-spacing:-0.5px;margin-top:16px}
+    .sec-body{font-size:15px;color:var(--grey);line-height:1.85;max-width:500px;margin-top:20px}
+    .sec-body-dark{font-size:15px;color:#555;line-height:1.85;max-width:500px;margin-top:20px}
+    .divider{width:40px;height:1px;background:var(--red);margin:26px 0}
+
+    /* ─ SERVICE PANELS ─ */
+    .svc-panels{display:grid;grid-template-columns:1fr 1fr}
+    .svc-panel{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/2}
+    .svc-panel img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+    .svc-panel:hover img{transform:scale(1.06)}
+    .svc-panel::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.15) 55%,transparent 100%)}
+    .svc-panel-inner{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:36px 40px}
+    .svc-line{width:0;height:2px;background:var(--red);transition:width .4s;margin-bottom:12px}
+    .svc-panel:hover .svc-line{width:44px}
+    .svc-panel-inner h3{font-family:var(--orb);font-weight:700;font-size:clamp(16px,2vw,26px);text-transform:uppercase;color:#fff;margin-bottom:8px}
+    .svc-panel-inner p{font-family:var(--cond);font-size:11px;font-weight:600;letter-spacing:3px;color:var(--red);text-transform:uppercase}
+
+    /* ─ REVIEWS — WHITE ─ */
+    .reviews-section{background:var(--light);padding:100px 80px;border-top:var(--lborder);border-bottom:var(--lborder)}
+    .rev-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .rev-eyebrow-bar{width:3px;height:20px;background:var(--red);flex-shrink:0}
+    .rev-eyebrow span{font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red)}
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+    .review-card{background:var(--white);padding:40px 36px;border:var(--lborder);position:relative;transition:box-shadow .3s}
+    .review-card:hover{box-shadow:0 8px 40px rgba(0,0,0,0.1)}
+    .review-stars{display:flex;gap:3px;margin-bottom:16px}
+    .review-stars span{color:var(--red);font-size:15px}
+    .review-text{font-size:14px;color:#444;line-height:1.8;margin-bottom:24px;font-style:italic}
+    .review-author{display:flex;align-items:center;gap:12px;border-top:var(--lborder);padding-top:18px}
+    .review-avatar{width:38px;height:38px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .review-avatar span{font-family:var(--orb);font-weight:700;font-size:12px;color:#fff}
+    .review-name{font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#111}
+    .review-detail{font-size:12px;color:#888;margin-top:2px}
+    .reviews-cta{text-align:center;margin-top:52px}
+    .reviews-cta p{font-family:var(--cond);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#999;margin-bottom:20px}
+
+    /* ─ ABOUT SPLIT ─ */
+    .about-split{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+    .about-split-img{position:relative;overflow:hidden}
+    .about-split-img img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+    .about-split-text{background:var(--dark2);padding:96px 80px;display:flex;flex-direction:column;justify-content:center}
+
+    /* ─ WHY SECTION — LIGHT ─ */
+    .why-section{background:var(--light2);padding:100px 80px;border-bottom:var(--lborder)}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+    .why-card{background:var(--white);padding:48px 40px;border-bottom:2px solid transparent;transition:border-color .3s}
+    .why-card:hover{border-color:var(--red)}
+    .why-num{font-family:var(--orb);font-weight:900;font-size:56px;color:rgba(0,0,0,0.05);line-height:1;margin-bottom:16px}
+    .why-card h3{font-family:var(--orb);font-weight:700;font-size:14px;text-transform:uppercase;color:#111;margin-bottom:12px;letter-spacing:1px}
+    .why-card p{font-size:14px;color:#666;line-height:1.75}
+
+    /* ─ FEATURED ─ */
+    .featured{position:relative;overflow:hidden;min-height:580px;display:flex;align-items:center}
+    .feat-bg{position:absolute;inset:0}
+    .feat-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+    .feat-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.82)}
+    .feat-content{position:relative;z-index:2;padding:100px 80px;max-width:760px}
+
+    /* ─ SERVICES PAGE ─ */
+    .page-hero{margin-top:var(--nav-h);padding:80px 80px 60px;background:var(--dark2);border-bottom:var(--border)}
+    .svc-blocks{padding:0}
+    .svc-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--border);min-height:520px;overflow:hidden}
+    .svc-block:last-child{border-bottom:none}
+    .svc-block.flip{direction:rtl}.svc-block.flip>*{direction:ltr}
+    .svc-photo{position:relative;overflow:hidden}
+    .svc-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+    .svc-block:hover .svc-photo img{transform:scale(1.04)}
+    .svc-info{background:var(--dark2);padding:68px 72px;display:flex;flex-direction:column;justify-content:center}
+    .svc-info h2{font-family:var(--orb);font-weight:700;font-size:clamp(20px,2.5vw,34px);text-transform:uppercase;color:#fff;margin:14px 0 20px}
+    .svc-feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin-bottom:32px}
+    .svc-feats li{font-size:13px;color:var(--grey);padding-left:14px;position:relative}
+    .svc-feats li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--red)}
+    .pricing-box{background:var(--dark3);border:var(--border);border-left:2px solid var(--red);padding:22px 24px}
+    .pricing-box h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+    .pr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+    .pr:last-child{border-bottom:none}
+    .pr span:first-child{font-size:13px;color:var(--grey)}
+    .pr span:last-child{font-family:var(--orb);font-weight:600;font-size:14px;color:#fff}
+
+    /* ─ GALLERY ─ */
+    .gal-grid{padding:40px;columns:3;column-gap:10px}
+    .gal-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;cursor:pointer}
+    .gal-item img{width:100%;display:block;transition:transform .5s}
+    .gal-item:hover img{transform:scale(1.04)}
+    .gal-ov{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s}
+    .gal-item:hover .gal-ov{background:rgba(232,39,26,0.12)}
+
+    /* ─ ABOUT PAGE ─ */
+    .about-top{margin-top:var(--nav-h);display:grid;grid-template-columns:1fr 1fr;min-height:620px}
+    .about-top-text{background:var(--dark2);padding:100px 80px;display:flex;flex-direction:column;justify-content:center}
+    .about-top-img{position:relative;overflow:hidden}
+    .about-top-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+    .values{background:var(--dark);padding:100px 80px;border-top:var(--border)}
+    .vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+    .val{background:var(--dark2);padding:52px 44px;border-bottom:2px solid transparent;transition:border-color .3s}
+    .val:hover{border-color:var(--red)}
+    .val-num{font-family:var(--orb);font-weight:900;font-size:60px;color:rgba(255,255,255,0.04);line-height:1;margin-bottom:18px}
+    .val h3{font-family:var(--orb);font-weight:700;font-size:15px;text-transform:uppercase;color:#fff;margin-bottom:14px;letter-spacing:1px}
+    .val p{font-size:14px;color:var(--grey);line-height:1.75}
+
+    /* ─ CONTACT ─ */
+    .contact-top{margin-top:var(--nav-h);padding:80px 80px 60px;background:var(--dark2);border-bottom:var(--border)}
+    .contact-body{display:grid;grid-template-columns:1fr 1.5fr}
+    .contact-left{padding:70px 60px;background:var(--dark3);border-right:var(--border)}
+    .contact-right{padding:70px 72px;background:var(--dark2)}
+    .info-blk{margin-bottom:44px}
+    .info-blk h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+    .info-blk p,.info-blk a{font-size:15px;color:var(--grey);line-height:1.9;display:block}
+    .info-blk a:hover{color:#fff}
+    .hrs-tbl{width:100%;border-collapse:collapse}
+    .hrs-tbl tr{border-bottom:1px solid rgba(255,255,255,0.04)}
+    .hrs-tbl td{padding:8px 0;font-size:13px;color:var(--grey)}
+    .hrs-tbl td:last-child{text-align:right;color:rgba(255,255,255,0.65)}
+    .cf{display:flex;flex-direction:column;gap:20px}
+    .cf h3{font-family:var(--orb);font-weight:700;font-size:20px;text-transform:uppercase;color:#fff;margin-bottom:4px}
+    .fg{display:flex;flex-direction:column;gap:8px}
+    .fg label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red)}
+    .fg input,.fg select,.fg textarea{background:var(--dark4);border:1px solid rgba(255,255,255,0.07);color:var(--off);font-family:var(--body);font-size:14px;padding:14px 18px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red)}
+    .fg textarea{resize:vertical;min-height:120px}
+    .fg select option{background:var(--dark4)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .form-sub{background:var(--red);color:#fff;font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:17px;border:none;cursor:pointer;transition:background .2s;margin-top:4px}
+    .form-sub:hover{background:var(--red2)}
+    .form-ok{display:none;color:var(--red);font-family:var(--cond);font-size:11px;letter-spacing:3px;text-transform:uppercase;text-align:center;padding:16px;border:1px solid rgba(232,39,26,0.3);background:rgba(232,39,26,0.04)}
+    .map-wrap{height:440px}
+    .map-wrap iframe{width:100%;height:100%;border:none;display:block}
+
+    /* ─ FOOTER ─ */
+    footer{background:#000;border-top:var(--border)}
+    .foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;padding:70px 80px;border-bottom:var(--border)}
+    .fc{padding-right:40px}
+    .foot-brand{margin-bottom:18px}
+    .foot-brand-top{font-family:var(--orb);font-weight:800;font-size:18px;color:#fff;text-transform:uppercase;letter-spacing:2px;display:block}
+    .foot-brand-sub{font-family:var(--cond);font-size:9px;letter-spacing:5px;color:var(--red);text-transform:uppercase;display:block;margin-top:5px}
+    .fc p{font-size:13px;color:#484848;line-height:1.75;max-width:260px;margin-top:14px}
+    .fc h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+    .fc ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+    .fc ul li a{font-size:13px;color:#484848;cursor:pointer;transition:color .2s}
+    .fc ul li a:hover{color:#fff}
+    .fc address{font-style:normal}
+    .fc address a{font-size:13px;color:#484848;display:block;margin-bottom:8px;transition:color .2s}
+    .fc address a:hover{color:#fff}
+    .foot-social{display:flex;gap:10px;margin-top:20px}
+    .si{width:36px;height:36px;border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s;cursor:pointer}
+    .si:hover{border-color:var(--red);background:rgba(232,39,26,0.08)}
+    .si svg{width:14px;height:14px;fill:#555;transition:fill .2s}
+    .si:hover svg{fill:var(--red)}
+    .foot-bottom{padding:20px 80px;display:flex;justify-content:space-between;align-items:center}
+    .foot-bottom p{font-size:11px;color:#2e2e2e;font-family:var(--cond);letter-spacing:2px}
+
+    /* ─ LIGHTBOX ─ */
+    .lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.97);align-items:center;justify-content:center}
+    .lb.open{display:flex}
+    .lb img{max-width:90vw;max-height:90vh;object-fit:contain}
+    .lb-x{position:absolute;top:20px;right:28px;font-size:28px;color:#fff;background:none;border:none;cursor:pointer;transition:color .2s}
+    .lb-x:hover{color:var(--red)}
+    .lb-a{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);color:#fff;font-size:36px;width:54px;height:54px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .lb-a:hover{background:var(--red);border-color:var(--red)}
+    .lb-a.pv{left:20px}.lb-a.nx{right:20px}
+
+    /* ─ RESPONSIVE ─ */
+    @media(max-width:960px){
+      nav{padding:0 20px}
+      .nav-links,.nav-cta{display:none}
+      .ham{display:flex}
+      .hero-content{padding:0 24px 64px}
+      .hero-title{font-size:clamp(40px,11vw,70px)}
+      .info-strip{grid-template-columns:1fr}
+      .info-strip-item{border-right:none;border-bottom:var(--border);padding:36px 24px}
+      .info-strip-item:last-child{border-bottom:none}
+      .svc-panels{grid-template-columns:1fr}
+      .reviews-section{padding:60px 24px}
+      .reviews-grid{grid-template-columns:1fr}
+      .why-section{padding:60px 24px}
+      .why-grid{grid-template-columns:1fr}
+      .about-split{grid-template-columns:1fr}
+      .about-split-img{aspect-ratio:16/9}
+      .about-split-text{padding:56px 24px}
+      .feat-content{padding:60px 24px}
+      .page-hero{padding:56px 24px 40px}
+      .svc-block{grid-template-columns:1fr}
+      .svc-block.flip{direction:ltr}
+      .svc-photo{aspect-ratio:16/9}
+      .svc-info{padding:40px 24px}
+      .svc-feats{grid-template-columns:1fr}
+      .gal-grid{padding:16px;columns:2}
+      .about-top{grid-template-columns:1fr}
+      .about-top-img{aspect-ratio:16/9}
+      .about-top-text{padding:56px 24px}
+      .values{padding:60px 24px}
+      .vals-grid{grid-template-columns:1fr}
+      .contact-top{padding:56px 24px 40px}
+      .contact-body{grid-template-columns:1fr}
+      .contact-left,.contact-right{padding:48px 24px}
+      .form-row{grid-template-columns:1fr}
+      .foot-top{grid-template-columns:1fr 1fr;gap:44px;padding:48px 24px}
+      .foot-bottom{flex-direction:column;gap:8px;padding:20px 24px;text-align:center}
+    }
+    @media(max-width:520px){.gal-grid{columns:1}.foot-top{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand" onclick="go('home')">
+    <span class="nav-brand-top">Revere</span>
+    <span class="nav-brand-sub">Detailing</span>
+  </div>
+  <ul class="nav-links">
+    <li><a id="nl-home"     onclick="go('home')">Home</a></li>
+    <li><a id="nl-about"    onclick="go('about')">About</a></li>
+    <li><a id="nl-services" onclick="go('services')">Services</a></li>
+    <li><a id="nl-gallery"  onclick="go('gallery')">Gallery</a></li>
+    <li><a id="nl-contact"  onclick="go('contact')">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="go('contact')">Book Now</button>
+  <button class="ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a onclick="go('home');closeMenu()">Home</a>
+  <a onclick="go('about');closeMenu()">About</a>
+  <a onclick="go('services');closeMenu()">Services</a>
+  <a onclick="go('gallery');closeMenu()">Gallery</a>
+  <a onclick="go('contact');closeMenu()">Contact</a>
+</div>
+
+<!-- ════════════ HOME ════════════ -->
+<div id="home" class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="slide" id="s0"><img src="IMG_7092.jpg" alt="Shelby GT500"/></div>
+    <div class="slide" id="s1"><img src="IMG_7114.jpg" alt="BMW M3 night"/></div>
+    <div class="slide" id="s2"><img src="IMG_7109.jpg" alt="White Corvette Z06"/></div>
+    <div class="slide" id="s3"><img src="IMG_7078.jpg" alt="Mercedes GLE sunset"/></div>
+    <div class="hero-content">
+      <div class="eyebrow"><div class="eyebrow-bar"></div><span>Mobile Automotive Care &mdash; DFW Metroplex</span></div>
+      <h1 class="hero-title">Driven<br/>By<br/>Perfection.</h1>
+      <p class="hero-sub">Premium mobile detailing &mdash; we come to you</p>
+      <div class="hero-btns">
+        <button class="btn-red" onclick="go('contact')">Book a Detail</button>
+        <button class="btn-ghost" onclick="go('services')">View Services</button>
+      </div>
+    </div>
+    <button class="h-arr pv" onclick="moveSlide(-1)">&#8249;</button>
+    <button class="h-arr nx" onclick="moveSlide(1)">&#8250;</button>
+    <div class="hero-dots" id="heroDots"></div>
+  </div>
+
+  <!-- BLACK INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-strip-item">
+      <div class="strip-eyebrow">Service Area</div>
+      <h3>All of DFW</h3>
+      <p>Based in North Texas, we serve the entire DFW Metroplex — from Southlake to Frisco, Keller to Plano, and everywhere in between.</p>
+    </div>
+    <div class="info-strip-item">
+      <div class="strip-eyebrow">Fully Mobile</div>
+      <h3>We Come To You</h3>
+      <p>No drop-offs, no waiting rooms. We bring our professional-grade setup directly to your driveway on your schedule.</p>
+    </div>
+    <div class="info-strip-item">
+      <div class="strip-eyebrow">Established 2020</div>
+      <h3>Trusted & Proven</h3>
+      <p>Years of experience detailing everything from daily drivers to exotics. Quality results and professional service, every time.</p>
+    </div>
+  </div>
+
+  <!-- SERVICE PANELS -->
+  <div class="svc-panels">
+    <div class="svc-panel" onclick="go('services')">
+      <img src="IMG_7113.jpg" alt="Interior Detailing"/>
+      <div class="svc-panel-inner"><div class="svc-line"></div><h3>Interior Detailing</h3><p>Explore Service</p></div>
+    </div>
+    <div class="svc-panel" onclick="go('services')">
+      <img src="IMG_7126.jpg" alt="Exterior Detailing"/>
+      <div class="svc-panel-inner"><div class="svc-line"></div><h3>Exterior Detailing</h3><p>Explore Service</p></div>
+    </div>
+  </div>
+
+  <!-- REVIEWS — WHITE SECTION -->
+  <div class="reviews-section">
+    <div class="rev-eyebrow"><div class="rev-eyebrow-bar"></div><span>Google Reviews</span></div>
+    <h2 class="sec-title-dark">Real Results.<br/>Real Reviews.</h2>
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+        <p class="review-text">"Liam is a great guy and does great work. Got a full paint correction and ceramic coat done on my truck and it has never looked this good. Great work and prices."</p>
+        <div class="review-author">
+          <div class="review-avatar"><span>JJ</span></div>
+          <div><div class="review-name">Jase Jenkins</div><div class="review-detail">Full Paint Correction &amp; Ceramic Coat</div></div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+        <p class="review-text">"Liam has been doing my truck for a couple of years now and there hasn't been one time where I wasn't satisfied. I would highly recommend booking!"</p>
+        <div class="review-author">
+          <div class="review-avatar"><span>KD</span></div>
+          <div><div class="review-name">Khaled Dabbagh</div><div class="review-detail">Recurring Maintenance Client</div></div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+        <p class="review-text">"Best in the DFW. Have detailed 2 trucks of mine and never miss a spot. Very respectful and kind at this establishment."</p>
+        <div class="review-author">
+          <div class="review-avatar"><span>BR</span></div>
+          <div><div class="review-name">Blake Royer</div><div class="review-detail">Multiple Vehicles Detailed</div></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="reviews-cta">
+      <p>Serving the entire DFW Metroplex &mdash; We come to you</p>
+      <button class="btn-dark" onclick="go('contact')">Book Your Detail</button>
+    </div>
+  </div>
+
+  <!-- ABOUT SPLIT -->
+  <div class="about-split">
+    <div class="about-split-img"><img src="IMG_7064.jpg" alt="Black Porsche 911"/></div>
+    <div class="about-split-text">
+      <div class="eyebrow"><div class="eyebrow-bar"></div><span>About Revere</span></div>
+      <h2 class="sec-title">Mobile Care<br/>Done Right.</h2>
+      <div class="divider"></div>
+      <p class="sec-body">Revere Detailing is a premium mobile auto detailing service serving the entire DFW Metroplex. We make high-end vehicles look their absolute best — on your schedule, at your location. From deep interior cleans to ceramic and graphene coatings, every service is performed with precision and care.</p>
+      <button class="btn-ghost" onclick="go('about')" style="margin-top:28px;align-self:flex-start">Our Story</button>
+    </div>
+  </div>
+
+  <!-- WHY REVERE — LIGHT SECTION -->
+  <div class="why-section">
+    <div class="rev-eyebrow"><div class="rev-eyebrow-bar"></div><span>Why Revere</span></div>
+    <h2 class="sec-title-dark">The Revere<br/>Difference.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h3>We Come To You</h3>
+        <p>No drop-offs, no waiting rooms. We bring professional-grade equipment directly to your driveway — saving you time without sacrificing quality.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h3>Premium Products Only</h3>
+        <p>We use professional-grade chemicals and tools on every job. Your vehicle deserves the best — and that's exactly what we bring to every appointment.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h3>Nothing Missed</h3>
+        <p>From the wheel wells to the headliner, we treat every vehicle like it's our own — because your satisfaction is our reputation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED: CERAMIC -->
+  <div class="featured">
+    <div class="feat-bg">
+      <img src="IMG_7060.jpg" alt="Ceramic Coating"/>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.82)"></div>
+    </div>
+    <div class="feat-content">
+      <div class="eyebrow"><div class="eyebrow-bar"></div><span>Featured Service</span></div>
+      <h2 class="sec-title">Ceramic &amp;<br/>Graphene<br/>Coatings.</h2>
+      <p class="sec-body">Protect your vehicle's paint with long-lasting, hydrophobic ceramic or graphene coatings. Shield against UV, contaminants, and daily wear — all while maintaining a deep, mirror-like finish that turns heads.</p>
+      <button class="btn-red" onclick="go('services')" style="margin-top:32px">See Packages</button>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+
+<!-- ════════════ ABOUT ════════════ -->
+<div id="about" class="page">
+  <div class="about-top">
+    <div class="about-top-text">
+      <div class="eyebrow"><div class="eyebrow-bar"></div><span>Our Story</span></div>
+      <h1 class="sec-title">Where<br/>Passion<br/>Meets<br/>Precision.</h1>
+      <div class="divider"></div>
+      <p class="sec-body">Founded in North Texas, Revere Detailing was built on a simple belief: every vehicle deserves professional-grade care delivered with the convenience of mobile service. We started in driveways across DFW and grew into one of the region's most trusted names in premium auto detailing.</p>
+    </div>
+    <div class="about-top-img"><img src="IMG_7109.jpg" alt="White Corvette Z06"/></div>
+  </div>
+  <div class="values">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span>What We Stand For</span></div>
+    <h2 class="sec-title">The Revere Standard.</h2>
+    <div class="vals-grid">
+      <div class="val"><div class="val-num">01</div><h3>Precision</h3><p>Every detail matters. We approach each vehicle with meticulous care, ensuring nothing is overlooked from the deepest carpet fibers to the outermost paint surface.</p></div>
+      <div class="val"><div class="val-num">02</div><h3>Convenience</h3><p>Your time is valuable. We bring professional-grade equipment directly to your home or office — no drop-offs, no waiting, no hassle.</p></div>
+      <div class="val"><div class="val-num">03</div><h3>Quality</h3><p>We use only professional-grade products and proven techniques. No shortcuts, no compromises. The result speaks for itself every single time.</p></div>
+    </div>
+  </div>
+  <div style="background:var(--dark2);padding:100px 80px;border-top:var(--border)">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span>Ready to Book?</span></div>
+    <h2 class="sec-title">Let's Make<br/>Your Vehicle<br/>Shine.</h2>
+    <p class="sec-body">Serving the entire DFW Metroplex. Mobile service — we come to you.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:36px">
+      <button class="btn-red" onclick="go('contact')">Book a Detail</button>
+      <button class="btn-ghost" onclick="go('services')">View Services</button>
+    </div>
+  </div>
+</div><!-- /about -->
+
+
+<!-- ════════════ SERVICES ════════════ -->
+<div id="services" class="page">
+  <div class="page-hero">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span>What We Offer</span></div>
+    <h1 class="sec-title">Our Services.</h1>
+    <p class="sec-body">Professional mobile detailing for every vehicle, budget, and need. All services performed at your location throughout the DFW Metroplex.</p>
+  </div>
+  <div class="svc-blocks">
+
+    <div class="svc-block">
+      <div class="svc-photo"><img src="IMG_7126.jpg" alt="Express Exterior" style="object-position:center 30%"/></div>
+      <div class="svc-info">
+        <div class="eyebrow"><div class="eyebrow-bar"></div><span>Exterior Service</span></div>
+        <h2>Express Exterior</h2>
+        <ul class="svc-feats"><li>Wheels &amp; tires cleaned</li><li>Fender wells cleaned</li><li>Foam bath / hand wash</li><li>Tires shined</li><li>Door jambs dried</li><li>Gas compartment cleaned</li><li>Spray sealant applied</li></ul>
+        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$75</span></div><div class="pr"><span>Mid-Size SUV</span><span>$90</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$110</span></div></div>
+      </div>
+    </div>
+
+    <div class="svc-block flip">
+      <div class="svc-photo"><img src="IMG_7113.jpg" alt="Full Interior" style="object-position:center 30%"/></div>
+      <div class="svc-info">
+        <div class="eyebrow"><div class="eyebrow-bar"></div><span>Interior Service</span></div>
+        <h2>Full Interior</h2>
+        <ul class="svc-feats"><li>Full vacuum</li><li>Floor mats cleaned</li><li>Windows wiped</li><li>Leather seats cleaned</li><li>Spot cleaning</li><li>Plastic &amp; vinyl trim</li><li>Pedals cleaned</li><li>Scent applied</li></ul>
+        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$130</span></div><div class="pr"><span>Mid-Size SUV</span><span>$155</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$190</span></div></div>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <div class="svc-photo"><img src="IMG_7107.jpg" alt="Standard Package" style="object-position:center 30%"/></div>
+      <div class="svc-info">
+        <div class="eyebrow"><div class="eyebrow-bar"></div><span>Most Popular</span></div>
+        <h2>Standard Package</h2>
+        <p style="font-size:13px;color:var(--grey);margin-bottom:20px">Complete inside &amp; out — the most popular choice for a full vehicle refresh.</p>
+        <ul class="svc-feats"><li>Full exterior wash</li><li>Wheel &amp; tire service</li><li>Full interior vacuum</li><li>Windows in &amp; out</li><li>Leather &amp; trim cleaned</li><li>Spray sealant applied</li><li>Door jambs dried</li><li>Scent applied</li></ul>
+        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$180</span></div><div class="pr"><span>Mid-Size SUV</span><span>$215</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$255</span></div></div>
+      </div>
+    </div>
+
+    <div class="svc-block flip">
+      <div class="svc-photo"><img src="IMG_7104.jpg" alt="Premium Package" style="object-position:center 25%"/></div>
+      <div class="svc-info">
+        <div class="eyebrow"><div class="eyebrow-bar"></div><span>Premium Service</span></div>
+        <h2>Premium Package</h2>
+        <p style="font-size:13px;color:var(--grey);margin-bottom:20px">The full Revere experience — deep cleaning with protection and polish for a showroom result.</p>
+        <ul class="svc-feats"><li>Everything in Standard</li><li>Engine bay cleaning</li><li>Clay bar treatment</li><li>Paint decontamination</li><li>Hand wax / sealant</li><li>Interior conditioning</li><li>Premium tire dressing</li><li>Odor elimination</li></ul>
+        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Sedan / Coupe</span><span>$280</span></div><div class="pr"><span>Mid-Size SUV</span><span>$320</span></div><div class="pr"><span>Full-Size SUV / Truck</span><span>$375</span></div></div>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <div class="svc-photo"><img src="IMG_7060.jpg" alt="Paint Correction" style="object-position:center 40%"/></div>
+      <div class="svc-info">
+        <div class="eyebrow"><div class="eyebrow-bar"></div><span>Paint Services</span></div>
+        <h2>Paint Correction</h2>
+        <p style="font-size:13px;color:var(--grey);margin-bottom:20px">Remove swirl marks, light scratches, water spots, and oxidation to restore your paint's true depth and clarity.</p>
+        <ul class="svc-feats"><li>Single-stage correction</li><li>Two-stage correction</li><li>Swirl mark removal</li><li>Water spot removal</li><li>Scratch removal (light)</li><li>Paint depth tested</li></ul>
+        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>Single Stage</span><span>$350</span></div><div class="pr"><span>Two Stage</span><span>$550</span></div><div class="pr"><span>Full Correction</span><span>Contact for Quote</span></div></div>
+      </div>
+    </div>
+
+    <div class="svc-block flip">
+      <div class="svc-photo"><img src="IMG_7110.jpg" alt="Ceramic Coating" style="object-position:center 30%"/></div>
+      <div class="svc-info">
+        <div class="eyebrow"><div class="eyebrow-bar"></div><span>Coating Services</span></div>
+        <h2>Ceramic &amp;<br/>Graphene</h2>
+        <p style="font-size:13px;color:var(--grey);margin-bottom:20px">Industry-grade coatings delivering a hydrophobic, self-cleaning surface that protects your investment for years.</p>
+        <ul class="svc-feats"><li>Full paint coating</li><li>Wheel coating</li><li>Glass coating</li><li>Interior coating</li><li>Graphene upgrade</li><li>Multi-year protection</li></ul>
+        <div class="pricing-box"><h4>Pricing Starts At</h4><div class="pr"><span>1-Year Ceramic</span><span>$499</span></div><div class="pr"><span>3-Year Ceramic</span><span>$799</span></div><div class="pr"><span>Graphene Coating</span><span>$999+</span></div></div>
+      </div>
+    </div>
+
+  </div>
+  <div style="background:var(--dark2);padding:100px 80px;border-top:var(--border)">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span>Keep It Perfect</span></div>
+    <h2 class="sec-title">Maintenance<br/>Plans.</h2>
+    <p class="sec-body">Keep your vehicle in pristine condition year-round. Monthly, bi-monthly, and quarterly plans tailored to your schedule and budget.</p>
+    <button class="btn-red" onclick="go('contact')" style="margin-top:32px">Inquire About Plans</button>
+  </div>
+</div><!-- /services -->
+
+
+<!-- ════════════ GALLERY ════════════ -->
+<div id="gallery" class="page">
+  <div class="page-hero">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span>Our Work</span></div>
+    <h1 class="sec-title">Gallery.</h1>
+    <p class="sec-body">A look at some of the vehicles we've had the privilege of caring for across the DFW Metroplex.</p>
+  </div>
+  <div class="gal-grid" id="galGrid"></div>
+</div>
+
+
+<!-- ════════════ CONTACT ════════════ -->
+<div id="contact" class="page">
+  <div class="contact-top">
+    <div class="eyebrow"><div class="eyebrow-bar"></div><span>Get In Touch</span></div>
+    <h1 class="sec-title">Book a Detail.</h1>
+    <p class="sec-body">Ready to experience the Revere difference? Fill out the form or give us a call — we'll get you on the schedule.</p>
+  </div>
+  <div class="contact-body">
+    <div class="contact-left">
+      <div class="info-blk">
+        <h4>Service Area</h4>
+        <p>Serving the entire DFW Metroplex<br/>North Texas &mdash; We come to you</p>
+      </div>
+      <div class="info-blk">
+        <h4>Contact</h4>
+        <a href="tel:9402084202">(940) 208-4202</a>
+        <a href="mailto:revereautodetailing@gmail.com">revereautodetailing@gmail.com</a>
+        <a href="https://revereautodetailing.com" target="_blank">revereautodetailing.com</a>
+      </div>
+      <div class="info-blk">
+        <h4>Hours</h4>
+        <table class="hrs-tbl">
+          <tr><td>Monday &ndash; Friday</td><td>5:00am &ndash; 6:00pm</td></tr>
+          <tr><td>Saturday</td><td>5:00am &ndash; 6:00pm</td></tr>
+          <tr><td>Sunday</td><td>By Appointment</td></tr>
+        </table>
+      </div>
+      <div class="info-blk">
+        <h4>Follow Us</h4>
+        <div style="display:flex;gap:10px;margin-top:4px">
+          <a href="https://www.instagram.com/revereautodetailing.tx/" target="_blank" class="si" title="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/people/Revere-Auto-Detail/100090432553786/" target="_blank" class="si" title="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <form class="cf" action="https://formsubmit.co/revereautodetailing@gmail.com" method="POST" onsubmit="submitForm(event)">
+        <input type="hidden" name="_captcha" value="false"/>
+        <input type="hidden" name="_subject" value="New Booking Request — Revere Detailing"/>
+        <h3>Request a Booking</h3>
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="John" required/></div>
+          <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith" required/></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="john@example.com" required/></div>
+        <div class="fg"><label>Phone</label><input type="tel" name="phone" placeholder="(555) 000-0000"/></div>
+        <div class="form-row">
+          <div class="fg"><label>Vehicle Type</label><select name="vehicle_type"><option value="">Select...</option><option>Sedan / Coupe</option><option>Mid-Size SUV</option><option>Full-Size SUV</option><option>Truck</option><option>Sports Car / Exotic</option><option>Van / Minivan</option></select></div>
+          <div class="fg"><label>Service</label><select name="service"><option value="">Select...</option><option>Express Exterior</option><option>Full Interior</option><option>Standard Package</option><option>Premium Package</option><option>Paint Correction</option><option>Ceramic / Graphene Coating</option><option>Maintenance Plan</option><option>Not Sure / Other</option></select></div>
+        </div>
+        <div class="fg"><label>Your City / Area</label><input type="text" name="location" placeholder="Southlake, TX"/></div>
+        <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your vehicle and what you need..."></textarea></div>
+        <button type="submit" class="form-sub">Send Request</button>
+        <div class="form-ok" id="fOk">Request received — we'll reach out within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+  <div class="map-wrap">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d429295.8!2d-97.0641!3d32.9579!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c27b0e2def14d%3A0x5c44ce19e2f94c75!2sDFW%20Metroplex%2C%20TX!5e0!3m2!1sen!2sus!4v1714500000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Revere Detailing — DFW Metroplex Service Area"></iframe>
+  </div>
+</div><!-- /contact -->
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-x" onclick="closeLb()">&#10005;</button>
+  <button class="lb-a pv" onclick="moveLb(-1)">&#8249;</button>
+  <img id="lbImg" src="" alt="Revere Detailing"/>
+  <button class="lb-a nx" onclick="moveLb(1)">&#8250;</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="fc">
+      <div class="foot-brand"><span class="foot-brand-top">Revere</span><span class="foot-brand-sub">Detailing</span></div>
+      <p>Premium mobile automotive care throughout the DFW Metroplex. Professional results at your driveway — every time.</p>
+      <div class="foot-social">
+        <a href="https://www.instagram.com/revereautodetailing.tx/" target="_blank" class="si" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Revere-Auto-Detail/100090432553786/" target="_blank" class="si" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="fc">
+      <h4>Services</h4>
+      <ul>
+        <li><a onclick="go('services')">Express Exterior</a></li>
+        <li><a onclick="go('services')">Full Interior</a></li>
+        <li><a onclick="go('services')">Standard Package</a></li>
+        <li><a onclick="go('services')">Premium Package</a></li>
+        <li><a onclick="go('services')">Paint Correction</a></li>
+        <li><a onclick="go('services')">Ceramic / Graphene</a></li>
+        <li><a onclick="go('services')">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Pages</h4>
+      <ul>
+        <li><a onclick="go('home')">Home</a></li>
+        <li><a onclick="go('about')">About</a></li>
+        <li><a onclick="go('services')">Services</a></li>
+        <li><a onclick="go('gallery')">Gallery</a></li>
+        <li><a onclick="go('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Contact</h4>
+      <address>
+        DFW Metroplex, TX<br/>Mobile Service Throughout North Texas<br/><br/>
+        <a href="tel:9402084202">(940) 208-4202</a>
+        <a href="mailto:revereautodetailing@gmail.com">revereautodetailing@gmail.com</a>
+        <a style="font-size:12px;color:#333;margin-top:6px;cursor:default">Mon&ndash;Sat: 5am &ndash; 6pm</a>
+      </address>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>&copy; 2025 Revere Detailing &mdash; DFW Metroplex, TX</p>
+    <p>Mobile Automotive Care &mdash; Serving All of North Texas</p>
+  </div>
+</footer>
+
+<script>
+  /* ── PAGES ── */
+  const PAGES=['home','about','services','gallery','contact'];
+  let busy=false;
+  function go(id){
+    if(busy)return;
+    const cur=PAGES.find(p=>document.getElementById(p).classList.contains('active'));
+    if(cur===id)return;
+    busy=true;
+    closeMenu();
+    PAGES.forEach(p=>{const l=document.getElementById('nl-'+p);if(l)l.classList.remove('act')});
+    const l=document.getElementById('nl-'+id);if(l)l.classList.add('act');
+    const curEl=document.getElementById(cur||id);
+    curEl.classList.remove('visible');
+    setTimeout(()=>{
+      PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
+      window.scrollTo(0,0);
+      document.body.scrollTop=0;
+      document.documentElement.scrollTop=0;
+      const next=document.getElementById(id);
+      next.classList.add('active');
+      if(id==='gallery')buildGal();
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{next.classList.add('visible');busy=false}));
+    },180);
+  }
+  function toggleMenu(){document.getElementById('ham').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open')}
+  function closeMenu(){document.getElementById('ham').classList.remove('open');document.getElementById('mobMenu').classList.remove('open')}
+
+  /* ── HERO ── */
+  const slides=document.querySelectorAll('.slide');
+  const dotsEl=document.getElementById('heroDots');
+  let cur=0;
+  slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>goSlide(i);dotsEl.appendChild(d)});
+  const getDots=()=>document.querySelectorAll('.dot');
+  function goSlide(n){slides[cur].classList.remove('active');getDots()[cur].classList.remove('on');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');getDots()[cur].classList.add('on')}
+  function moveSlide(d){goSlide(cur+d)}
+  setInterval(()=>moveSlide(1),5800);
+
+  /* ── GALLERY ── */
+  const GALLERY=[
+    'IMG_7057.jpg','IMG_7058.jpg','IMG_7060.jpg','IMG_7062.jpg','IMG_7063.jpg',
+    'IMG_7064.jpg','IMG_7067.jpg','IMG_7069.jpg','IMG_7070.jpg','IMG_7071.jpg',
+    'IMG_7072.jpg','IMG_7074.jpg','IMG_7075.jpg','IMG_7077.jpg','IMG_7078.jpg',
+    'IMG_7081.jpg','IMG_7082.jpg','IMG_7083.jpg','IMG_7084.jpg','IMG_7086.jpg',
+    'IMG_7088.jpg','IMG_7090.jpg','IMG_7091.jpg','IMG_7092.jpg','IMG_7099.jpg',
+    'IMG_7100.jpg','IMG_7101.jpg','IMG_7102.jpg','IMG_7103.jpg','IMG_7104.jpg',
+    'IMG_7107.jpg','IMG_7108.jpg','IMG_7109.jpg','IMG_7110.jpg','IMG_7111.jpg',
+    'IMG_7112.jpg','IMG_7113.jpg','IMG_7114.jpg','IMG_7116.jpg','IMG_7117.jpg',
+    'IMG_7118.jpg','IMG_7119.jpg','IMG_7120.jpg','IMG_7126.jpg',
+  ];
+  let galBuilt=false;
+  function buildGal(){
+    if(galBuilt)return;galBuilt=true;
+    const g=document.getElementById('galGrid');
+    GALLERY.forEach((src,i)=>{
+      const item=document.createElement('div');item.className='gal-item';item.onclick=()=>openLb(i);
+      const el=document.createElement('img');el.src=src;el.alt='Revere Detailing';el.loading='lazy';
+      const ov=document.createElement('div');ov.className='gal-ov';
+      item.appendChild(el);item.appendChild(ov);g.appendChild(item);
+    });
+  }
+
+  /* ── LIGHTBOX ── */
+  let lbCur=0;
+  function openLb(i){lbCur=i;document.getElementById('lbImg').src=GALLERY[i];document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+  function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+  function moveLb(d){lbCur=(lbCur+d+GALLERY.length)%GALLERY.length;document.getElementById('lbImg').src=GALLERY[lbCur]}
+  document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLb()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')moveLb(-1);if(e.key==='ArrowRight')moveLb(1)});
+
+  /* ── FORM ── */
+  async function submitForm(e){
+    e.preventDefault();
+    const form=e.target,btn=form.querySelector('.form-sub');
+    btn.textContent='Sending...';btn.disabled=true;
+    try{
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(res.ok){form.reset();document.getElementById('fOk').style.display='block';btn.textContent='Sent'}
+      else{btn.textContent='Error — Try Again';btn.disabled=false}
+    }catch{btn.textContent='Error — Try Again';btn.disabled=false}
+  }
+
+  go('home');
+</script>
+</body>
+</html>

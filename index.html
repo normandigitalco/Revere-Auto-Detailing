@@ -274,8 +274,8 @@
 
     /* ══════════ GALLERY ══════════ */
     .gal-grid{padding:32px;columns:3;column-gap:8px;will-change:transform}
-    .gal-item{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;border-radius:6px}
-    .gal-item img{width:100%;display:block;transition:transform .5s;border-radius:6px}
+    .gal-item{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;border-radius:6px;aspect-ratio:3/4;background:#1a1a1a}
+    .gal-item img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s;border-radius:6px}
     .gal-item:hover img{transform:scale(1.04)}
     .gal-ov{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s;border-radius:6px}
     .gal-item:hover .gal-ov{background:rgba(201,168,76,0.12)}
@@ -393,7 +393,8 @@
       .h-arr{display:none}
       .hero-dots{right:20px;bottom:20px}
 
-      .pillar-strip{grid-template-columns:1fr 1fr;height:auto}
+      .pillar-strip{grid-template-columns:1fr 1fr;height:auto;min-height:unset}
+      .pillar{height:220px}
       .pillar{height:220px}
       .pillar:not(:last-child)::after{display:none}
       .pillar-inner{padding:20px 18px}
@@ -473,7 +474,7 @@
 
     @media(max-width:400px){
       .hero-title{font-size:clamp(30px,10vw,48px)}
-      .pillar-strip{grid-template-columns:1fr}
+      .pillar-strip{grid-template-columns:1fr 1fr}
       .pillar{height:200px}
       .gal-grid{columns:2;column-gap:4px;padding:8px}
     }
@@ -698,9 +699,9 @@
   <div class="about-top">
     <div class="about-top-text">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Our Story</span></div>
-      <h1 class="sec-title">Built in<br/>DFW.<br/>Obsessed<br/>With Clean.</h1>
+      <h1 class="sec-title">Who<br/>We Are.</h1>
       <div class="divider"></div>
-      <p class="sec-body">Revere started the way most things do — out of frustration. Liam got tired of watching detail shops rush through jobs on vehicles that deserved better. So he built a mobile operation around one rule: treat every car like it belongs to you. No shop, no shortcuts, no strangers touching your vehicle. Just Liam, his equipment, and your driveway.</p>
+      <p class="sec-body">Revere Detailing is a professional mobile auto detailing service built on a simple standard — every vehicle deserves expert care, delivered with convenience. We bring premium products, proven techniques, and genuine attention to detail directly to your driveway. Our goal is straightforward: leave every vehicle cleaner, better protected, and looking its absolute best.</p>
     </div>
     <div class="about-top-img"><img src="IMG_7088.jpg" alt="Exotic Sports Car" loading="lazy" style="object-position:center 80%"/></div>
   </div>
@@ -829,7 +830,7 @@
   <div class="contact-top">
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>Get In Touch</span></div>
     <h1 class="sec-title">Book a Detail.</h1>
-    <p class="sec-body">Ready to experience the Revere difference? Fill out the form or give us a call.</p>
+    <p class="sec-body">Premium mobile detailing, brought directly to your door. Fill out the form or give us a call.</p>
   </div>
   <div class="contact-body">
     <div class="contact-left">
@@ -971,13 +972,13 @@
     const lnk=document.getElementById('nl-'+id);if(lnk)lnk.classList.add('act');
     const curEl=document.getElementById(cur||id);
     curEl.classList.remove('visible');
-    const delay=id==='gallery'?220:160;
+    const delay=id==='gallery'?350:160;
     setTimeout(()=>{
       PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
       window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
       const nxt=document.getElementById(id);nxt.classList.add('active');
       // Extra frames for gallery so columns reflow before fade-in
-      const frames=id==='gallery'?4:2;
+      const frames=id==='gallery'?8:2;
       let f=0;
       function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
       requestAnimationFrame(waitFrames);
@@ -1003,8 +1004,10 @@
     cur=(n+slides.length)%slides.length;
     slides[cur].classList.add('active');getDots()[cur].classList.add('on');
   }
-  function moveSlide(d){goSlide(cur+d)}
-  setInterval(()=>moveSlide(1),5800);
+  let autoTimer=null;
+  function startAuto(){clearInterval(autoTimer);autoTimer=setInterval(()=>moveSlide(1),5800);}
+  function moveSlide(d){goSlide(cur+d);startAuto()}
+  startAuto();
 
   /* ── HERO SWIPE ── */
   (function(){
@@ -1038,7 +1041,7 @@
     const g=document.getElementById('galGrid');
     GALLERY.forEach((src,i)=>{
       const item=document.createElement('div');item.className='gal-item';item.onclick=()=>openLb(i);
-      const el=document.createElement('img');el.src=src;el.alt='Revere Detailing';el.loading='lazy';
+      const el=document.createElement('img');el.src=src;el.alt='Revere Detailing';el.loading='lazy';el.decoding='async';
       const ov=document.createElement('div');ov.className='gal-ov';
       item.appendChild(el);item.appendChild(ov);g.appendChild(item);
     });

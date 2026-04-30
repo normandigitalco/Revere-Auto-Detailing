@@ -30,7 +30,7 @@
   <link rel="preload" as="image" href="IMG_7058.jpg" fetchpriority="high"/>
   <!-- Prefetch next slide images -->
   <link rel="prefetch" as="image" href="IMG_7069.jpg"/>
-  <link rel="prefetch" as="image" href="IMG_7078.jpg"/>
+  <link rel="prefetch" as="image" href="IMG_7078.webp"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -54,9 +54,9 @@
     img{display:block;max-width:100%}
 
     /* ─ PAGE TRANSITIONS ─ */
-    .page{position:absolute;top:0;left:0;width:100%;opacity:0;pointer-events:none;transition:opacity .18s ease;visibility:hidden}
+    .page{position:absolute;top:0;left:0;width:100%;opacity:0;pointer-events:none;visibility:hidden;transition:none}
     .page.active{position:relative;visibility:visible;pointer-events:auto}
-    .page.visible{opacity:1}
+    .page.visible{opacity:1;transition:opacity .2s ease}
 
     /* ══════════ NAV ══════════ */
     nav{
@@ -540,7 +540,7 @@
       <img src="IMG_7069.jpg" alt="White Mercedes G-Wagon" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s2">
-      <img src="IMG_7078.jpg" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
+      <img src="IMG_7078.webp" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s3">
       <img src="IMG_7091.jpg" alt="Shelby GT500" decoding="async" loading="lazy"/>
@@ -562,7 +562,7 @@
   <!-- PILLAR STRIP -->
   <div class="pillar-strip">
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7078.jpg" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7078.webp" alt="" aria-hidden="true" loading="lazy"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Mobile Service</div>
@@ -571,7 +571,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7092.jpg" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7092.webp" alt="" aria-hidden="true" loading="lazy"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Est. 2020</div>
@@ -580,7 +580,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7104.jpg" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7104.webp" alt="" aria-hidden="true" loading="lazy"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Professional Grade</div>
@@ -589,7 +589,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7086.jpg" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7086.webp" alt="" aria-hidden="true" loading="lazy"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Protection</div>
@@ -606,7 +606,7 @@
       <div class="svc-panel-inner"><div class="svc-line"></div><h3>Interior Detailing</h3><p>Explore Service</p></div>
     </div>
     <div class="svc-panel" onclick="go('services')">
-      <img src="IMG_7092.jpg" alt="Exterior Detailing" loading="lazy" style="object-position:center 55%"/>
+      <img src="IMG_7092.webp" alt="Exterior Detailing" loading="lazy" style="object-position:center 55%"/>
       <div class="svc-panel-inner"><div class="svc-line"></div><h3>Exterior Detailing</h3><p>Explore Service</p></div>
     </div>
   </div>
@@ -816,7 +816,7 @@
       </div>
     </div>
     <div class="svc-block flip">
-      <div class="svc-photo"><img src="IMG_7086.jpg" alt="Ceramic Coating" loading="lazy" style="object-position:center center"/></div>
+      <div class="svc-photo"><img src="IMG_7086.webp" alt="Ceramic Coating" loading="lazy" style="object-position:center center"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Coating Services</span></div>
         <h2>Ceramic &amp;<br/>Graphene</h2>
@@ -991,23 +991,19 @@
     busy=true;closeMenu();
     PAGES.forEach(p=>{const l=document.getElementById('nl-'+p);if(l)l.classList.remove('act')});
     const lnk=document.getElementById('nl-'+id);if(lnk)lnk.classList.add('act');
-    const curEl=document.getElementById(cur||id);
-    curEl.classList.remove('visible');
-    const delay=id==='gallery'?350:200;
-    setTimeout(()=>{
-      PAGES.forEach(p=>{
-        const el=document.getElementById(p);
-        el.classList.remove('active');
-        el.classList.remove('visible');
-      });
-      window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
-      const nxt=document.getElementById(id);
-      nxt.classList.add('active');
-      const frames=id==='gallery'?8:3;
-      let f=0;
-      function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
-      requestAnimationFrame(waitFrames);
-    },delay);
+    // Instantly hide everything - no flash
+    PAGES.forEach(p=>{
+      const el=document.getElementById(p);
+      el.classList.remove('visible');
+      el.classList.remove('active');
+    });
+    window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
+    const nxt=document.getElementById(id);
+    nxt.classList.add('active');
+    const frames=id==='gallery'?8:3;
+    let f=0;
+    function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
+    requestAnimationFrame(waitFrames);
   }
   function toggleMenu(){document.getElementById('ham').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open')}
   function closeMenu(){document.getElementById('ham').classList.remove('open');document.getElementById('mobMenu').classList.remove('open')}
@@ -1051,10 +1047,10 @@
   const GALLERY=[
     'IMG_7057.jpg','IMG_7058.jpg','IMG_7060.jpg','IMG_7062.jpg','IMG_7063.jpg',
     'IMG_7064.jpg','IMG_7067.jpg','IMG_7069.jpg','IMG_7070.jpg','IMG_7071.jpg',
-    'IMG_7072.jpg','IMG_7074.jpg','IMG_7075.jpg','IMG_7077.jpg','IMG_7078.jpg',
-    'IMG_7081.jpg','IMG_7082.jpg','IMG_7083.jpg','IMG_7084.jpg','IMG_7086.jpg',
-    'IMG_7088.jpg','IMG_7090.jpg','IMG_7091.jpg','IMG_7092.jpg','IMG_7099.jpg',
-    'IMG_7100.jpg','IMG_7101.jpg','IMG_7102.jpg','IMG_7103.jpg','IMG_7104.jpg',
+    'IMG_7072.jpg','IMG_7074.jpg','IMG_7075.jpg','IMG_7077.jpg','IMG_7078.webp',
+    'IMG_7081.jpg','IMG_7082.jpg','IMG_7083.jpg','IMG_7084.jpg','IMG_7086.webp',
+    'IMG_7088.jpg','IMG_7090.jpg','IMG_7091.jpg','IMG_7092.webp','IMG_7099.jpg',
+    'IMG_7100.jpg','IMG_7101.jpg','IMG_7102.jpg','IMG_7103.jpg','IMG_7104.webp',
     'IMG_7107.jpg','IMG_7108.jpg','IMG_7109.jpg','IMG_7110.jpg','IMG_7111.jpg',
     'IMG_7112.jpg','IMG_7113.jpg','IMG_7114.jpg','IMG_7116.jpg','IMG_7117.jpg',
     'IMG_7118.jpg','IMG_7119.jpg','IMG_7120.jpg','IMG_7126.jpg',
@@ -1098,7 +1094,7 @@
   // Preload key images after page load to reduce flash on tab switch
   window.addEventListener('load',()=>{
     const toPreload=[
-      'IMG_7070.jpg','IMG_7092.jpg', // home panels
+      'IMG_7070.jpg','IMG_7092.webp', // home panels
       'IMG_7082.jpg',                 // about
       'IMG_7099.jpg','IMG_7083.jpg',  // services top
     ];

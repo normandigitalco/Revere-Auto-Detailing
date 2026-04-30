@@ -6,10 +6,10 @@
   <title>Revere Detailing | Mobile Automotive Care — DFW Metroplex</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23111'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-weight='400' font-size='40' fill='%23C9A84C' letter-spacing='-1'%3ER%3C/text%3E%3C/svg%3E"/>
   <!-- Preload first hero image for instant display -->
-  <link rel="preload" as="image" href="IMG_7091.jpg" fetchpriority="high"/>
+  <link rel="preload" as="image" href="IMG_7069.jpg" fetchpriority="high"/>
   <!-- Prefetch next slide images -->
-  <link rel="prefetch" as="image" href="IMG_7078.jpg"/>
   <link rel="prefetch" as="image" href="IMG_7058.jpg"/>
+  <link rel="prefetch" as="image" href="IMG_7078.jpg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -83,19 +83,17 @@
     .hero{position:relative;height:82svh;min-height:560px;overflow:hidden;margin-top:var(--nav-h);background:#0a0a0a;contain:layout paint}
     .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;will-change:opacity;contain:strict}
     .slide.active{opacity:1}
+
     .slide img{
-      width:100%;height:100%;object-fit:cover;
-      /* decode async for non-first slides */
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;object-position:center 50%;
+      z-index:1;
     }
     /* First slide shows instantly — no transition delay */
     #s0{opacity:1;transition:none}
-    #s0 img{object-position:center 65%}
-    #s1 img{object-position:center 70%}
-    #s2 img{object-position:center 68%}
-    #s3 img{object-position:center 60%}
     .slide::after{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(115deg,rgba(0,0,0,0.84) 0%,rgba(0,0,0,0.35) 52%,rgba(0,0,0,0.05) 100%);
+      content:'';position:absolute;inset:0;z-index:2;
+      background:linear-gradient(115deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.3) 52%,rgba(0,0,0,0.05) 100%);
     }
     .hero-content{
       position:absolute;bottom:0;left:0;right:0;z-index:10;
@@ -275,7 +273,7 @@
     .pr-price span{font-size:11px;font-weight:400;color:#999;letter-spacing:0}
 
     /* ══════════ GALLERY ══════════ */
-    .gal-grid{padding:32px;columns:3;column-gap:8px}
+    .gal-grid{padding:32px;columns:3;column-gap:8px;will-change:transform}
     .gal-item{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;border-radius:6px}
     .gal-item img{width:100%;display:block;transition:transform .5s;border-radius:6px}
     .gal-item:hover img{transform:scale(1.04)}
@@ -297,18 +295,26 @@
     .val p{font-size:14px;color:var(--grey);line-height:1.75}
 
     /* ══════════ CONTACT ══════════ */
-    .contact-top{margin-top:var(--nav-h);padding:80px 80px 60px;background:var(--dark2);border-bottom:var(--border)}
-    .contact-body{display:grid;grid-template-columns:1fr 1.5fr}
-    .contact-left{padding:64px 56px;background:#e8e6e3;border-right:1px solid rgba(0,0,0,0.09)}
-    .contact-right{padding:64px 72px;background:#f2f1ef}
-    .info-blk{margin-bottom:40px}
-    .info-blk h4{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
-    .info-blk p,.info-blk a{font-size:15px;color:#555;line-height:1.9;display:block}
-    .info-blk a:hover{color:#000}
+    .contact-top{margin-top:var(--nav-h);padding:36px 80px 28px;background:var(--dark2);border-bottom:var(--border)}
+    .contact-body{display:grid;grid-template-columns:1fr 1.6fr}
+    .contact-left{padding:40px 44px;background:#111;display:flex;flex-direction:column}
+    .contact-phone-block{margin-bottom:40px}
+    .contact-phone-label{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block}
+    .contact-phone-num{font-family:var(--body);font-weight:400;font-size:clamp(28px,3.5vw,42px);color:#fff;letter-spacing:0;display:block;transition:color .2s}
+    .contact-phone-num:hover{color:var(--red)}
+    .contact-phone-sub{font-family:var(--cond);font-size:12px;letter-spacing:2px;color:#666;margin-top:6px;display:block}
+    .contact-right{padding:40px 64px;background:#f2f1ef}
+    .info-blk{margin-bottom:32px}
+    .info-blk h4{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+    .info-blk p,.info-blk a{font-size:14px;color:#aaa;line-height:1.9;display:block}
+    .info-blk a:hover{color:#fff}
     .hrs-tbl{width:100%;border-collapse:collapse}
-    .hrs-tbl tr{border-bottom:1px solid rgba(0,0,0,0.07)}
-    .hrs-tbl td{padding:8px 0;font-size:13px;color:#666}
-    .hrs-tbl td:last-child{text-align:right;color:rgba(0,0,0,0.75)}
+    .hrs-tbl tr{border-bottom:1px solid rgba(255,255,255,0.06)}
+    .hrs-tbl td{padding:8px 0;font-size:13px;color:#888}
+    .hrs-tbl td:last-child{text-align:right;color:#ccc}
+    /* Social icons in dark contact panel - no border */
+    .contact-left .si{border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.04)}
+    .contact-left .si:hover{border-color:var(--red);background:rgba(201,168,76,0.15)}
     .cf{display:flex;flex-direction:column;gap:18px}
     .cf h3{font-family:var(--orb);font-weight:700;font-size:20px;text-transform:uppercase;color:#111;margin-bottom:4px}
     .fg{display:flex;flex-direction:column;gap:7px}
@@ -321,7 +327,7 @@
     .form-sub{background:#111;color:#fff;font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background .2s;margin-top:4px;width:100%}
     .form-sub:hover{background:var(--red)}
     .form-ok{display:none;color:var(--red);font-family:var(--cond);font-size:11px;letter-spacing:3px;text-transform:uppercase;text-align:center;padding:14px;border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.04)}
-    .map-wrap{height:420px}
+    .map-wrap{height:420px;position:relative}
     .map-wrap iframe{width:100%;height:100%;border:none;display:block}
 
     /* ══════════ FOOTER ══════════ */
@@ -340,9 +346,9 @@
     .fc address a{font-size:13px;color:#888;display:block;margin-bottom:8px;transition:color .2s}
     .fc address a:hover{color:#fff}
     .foot-social{display:flex;gap:12px;margin-top:20px}
-    .si{width:48px;height:48px;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s;cursor:pointer;border-radius:2px}
+    .si{width:48px;height:48px;border:1px solid rgba(255,255,255,0.15);display:flex !important;align-items:center;justify-content:center;transition:border-color .2s,background .2s;cursor:pointer;border-radius:2px;text-decoration:none;box-sizing:border-box}
     .si:hover{border-color:var(--red);background:rgba(201,168,76,0.12)}
-    .si svg{width:20px;height:20px;fill:rgba(255,255,255,0.6);transition:fill .2s}
+    .si svg{width:20px;height:20px;fill:rgba(255,255,255,0.6);transition:fill .2s;flex-shrink:0;display:block;margin:auto}
     .si:hover svg{fill:var(--red)}
     .si.si-lg{width:56px;height:56px}
     .si.si-lg svg{width:24px;height:24px}
@@ -361,6 +367,13 @@
     /* ══════════ MOBILE FIRST ══════════ */
     /* Base is already mobile-friendly; desktop enhancements above */
 
+    @media(min-width:769px){
+      /* Desktop slide positions - tuned per image */
+      #s0 img{object-position:center 46%}  /* G-Wagon */
+      #s1 img{object-position:center 57%}  /* Porsche */
+      #s2 img{object-position:center 67%}  /* GLE Sunset */
+      #s3 img{object-position:center 66%}  /* Shelby */
+    }
     @media(max-width:768px){
       :root{--nav-h:72px}
 
@@ -371,8 +384,9 @@
       .nav-brand-sub{font-size:9px;letter-spacing:5px}
 
       .hero{height:82svh;min-height:500px}
+
       .hero-content{padding:0 20px 56px}
-      .hero-title{font-size:clamp(38px,12vw,64px);letter-spacing:-1px;margin-bottom:20px}
+      .hero-title{font-size:clamp(34px,10.5vw,60px);letter-spacing:-1px;margin-bottom:20px}
       .hero-sub{font-size:12px;letter-spacing:2px;margin-bottom:32px}
       .hero-btns{gap:10px}
       .btn-red,.btn-ghost{padding:14px 28px;font-size:10px}
@@ -414,6 +428,10 @@
       .svc-block{grid-template-columns:1fr}
       .svc-block.flip{direction:ltr}
       .svc-photo{aspect-ratio:4/3;min-height:unset;margin:12px;border-radius:10px}
+      /* Mobile position fixes - push cars down so they're not cut off */
+      .svc-photo img{object-position:center 80%}
+      .about-split-img img{object-position:center 80%}
+      .about-top-img img{object-position:center 80%}
       .svc-info{padding:36px 20px}
       .svc-info h2{font-size:clamp(20px,7vw,32px)}
       .svc-feats{grid-template-columns:1fr;gap:6px;margin-bottom:20px}
@@ -434,9 +452,11 @@
       .contact-top .sec-title{font-size:clamp(28px,9vw,44px);margin-top:10px}
       .contact-top .sec-body{margin-top:12px;font-size:13px}
       .contact-body{grid-template-columns:1fr;display:flex;flex-direction:column}
-      .contact-left{padding:32px 20px;order:1;border-right:none;border-bottom:var(--border)}
+      .contact-left{padding:32px 20px;order:1;min-height:unset}
       .contact-right{padding:32px 20px;order:2}
-      .info-blk{margin-bottom:28px}
+      .contact-phone-num{font-size:28px}
+      .contact-badges{padding-top:24px;margin-top:32px}
+      .info-blk{margin-bottom:22px}
       .form-row{grid-template-columns:1fr}
       .map-wrap{height:260px}
 
@@ -452,7 +472,7 @@
     }
 
     @media(max-width:400px){
-      .hero-title{font-size:clamp(34px,13vw,52px)}
+      .hero-title{font-size:clamp(30px,10vw,48px)}
       .pillar-strip{grid-template-columns:1fr}
       .pillar{height:200px}
       .gal-grid{columns:2;column-gap:4px;padding:8px}
@@ -492,16 +512,16 @@
   <!-- HERO — first image eager loaded -->
   <div class="hero">
     <div class="slide" id="s0">
-      <img src="IMG_7091.jpg" alt="Luxury Exterior Detail" fetchpriority="high" decoding="sync" loading="eager"/>
+      <img src="IMG_7069.jpg" alt="White Mercedes G-Wagon" fetchpriority="high" decoding="sync" loading="eager"/>
     </div>
     <div class="slide" id="s1">
-      <img src="IMG_7078.jpg" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
-    </div>
-    <div class="slide" id="s2">
       <img src="IMG_7058.jpg" alt="Black Porsche 911" decoding="async" loading="lazy"/>
     </div>
+    <div class="slide" id="s2">
+      <img src="IMG_7078.jpg" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
+    </div>
     <div class="slide" id="s3">
-      <img src="IMG_7069.jpg" alt="White Mercedes G-Wagon" decoding="async" loading="lazy"/>
+      <img src="IMG_7091.jpg" alt="Shelby GT500" decoding="async" loading="lazy"/>
     </div>
     <div class="hero-content">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Mobile Automotive Care &mdash; DFW Metroplex</span></div>
@@ -525,7 +545,7 @@
       <div class="pillar-inner">
         <div class="pillar-tag">Mobile Service</div>
         <h3>All of DFW</h3>
-        <p>Serving the entire Metroplex — from Southlake to Frisco, Keller to Plano. We bring the detail shop to your driveway.</p>
+        <p>Serving the entire Metroplex — from Flower Mound to McKinney, Southlake to Plano. We bring the detail shop to your driveway.</p>
       </div>
     </div>
     <div class="pillar">
@@ -607,7 +627,7 @@
 
   <!-- ABOUT SPLIT -->
   <div class="about-split">
-    <div class="about-split-img"><img src="IMG_7082.jpg" alt="Luxury Vehicle Detail" loading="lazy" style="object-position:center center"/></div>
+    <div class="about-split-img"><img src="IMG_7082.jpg" alt="Luxury Vehicle Detail" loading="lazy" style="object-position:center 92%"/></div>
     <div class="about-split-text">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>About Revere</span></div>
       <h2 class="sec-title">Mobile Care<br/>Done Right.</h2>
@@ -678,11 +698,11 @@
   <div class="about-top">
     <div class="about-top-text">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Our Story</span></div>
-      <h1 class="sec-title">Where<br/>Passion<br/>Meets<br/>Precision.</h1>
+      <h1 class="sec-title">Built in<br/>DFW.<br/>Obsessed<br/>With Clean.</h1>
       <div class="divider"></div>
-      <p class="sec-body">Founded in North Texas, Revere Detailing was built on a simple belief: every vehicle deserves professional-grade care delivered with the convenience of mobile service. We started in driveways across DFW and grew into one of the region's most trusted names in premium auto detailing.</p>
+      <p class="sec-body">Revere started the way most things do — out of frustration. Liam got tired of watching detail shops rush through jobs on vehicles that deserved better. So he built a mobile operation around one rule: treat every car like it belongs to you. No shop, no shortcuts, no strangers touching your vehicle. Just Liam, his equipment, and your driveway.</p>
     </div>
-    <div class="about-top-img"><img src="IMG_7088.jpg" alt="Exotic Sports Car" loading="lazy"/></div>
+    <div class="about-top-img"><img src="IMG_7088.jpg" alt="Exotic Sports Car" loading="lazy" style="object-position:center 80%"/></div>
   </div>
   <div class="values">
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>What We Stand For</span></div>
@@ -726,7 +746,7 @@
   </div>
   <div class="svc-blocks">
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7099.jpg" alt="Express Exterior" loading="lazy" style="object-position:center center"/></div>
+      <div class="svc-photo"><img src="IMG_7099.jpg" alt="Express Exterior" loading="lazy" style="object-position:center 92%"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Exterior Service</span></div>
         <h2>Express Exterior</h2>
@@ -744,7 +764,7 @@
       </div>
     </div>
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7083.jpg" alt="Standard Package" loading="lazy" style="object-position:center center"/></div>
+      <div class="svc-photo"><img src="IMG_7083.jpg" alt="Standard Package" loading="lazy" style="object-position:center 80%"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Most Popular</span></div>
         <h2>Standard Package</h2>
@@ -754,7 +774,7 @@
       </div>
     </div>
     <div class="svc-block flip">
-      <div class="svc-photo"><img src="IMG_7104.jpg" alt="Premium Package" loading="lazy" style="object-position:center center"/></div>
+      <div class="svc-photo"><img src="IMG_7069.jpg" alt="Premium Package" loading="lazy" style="object-position:center 60%"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Premium Service</span></div>
         <h2>Premium Package</h2>
@@ -764,7 +784,7 @@
       </div>
     </div>
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7075.jpg" alt="Paint Correction" loading="lazy" style="object-position:center center"/></div>
+      <div class="svc-photo"><img src="IMG_7095.jpg" alt="Paint Correction" loading="lazy" style="object-position:center 60%"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Paint Services</span></div>
         <h2>Paint Correction</h2>
@@ -813,33 +833,30 @@
   </div>
   <div class="contact-body">
     <div class="contact-left">
-      <div class="info-blk">
-        <h4>Service Area</h4>
-        <p>Serving the entire DFW Metroplex<br/>North Texas &mdash; We come to you</p>
-      </div>
-      <div class="info-blk">
-        <h4>Contact</h4>
-        <a href="tel:9402084202">(940) 208-4202</a>
-        <a href="mailto:revereautodetailing@gmail.com">revereautodetailing@gmail.com</a>
-        <a href="https://revereautodetailing.com" target="_blank">revereautodetailing.com</a>
-      </div>
-      <div class="info-blk">
-        <h4>Hours</h4>
-        <table class="hrs-tbl">
-          <tr><td>Mon &ndash; Fri</td><td>5:00am &ndash; 6:00pm</td></tr>
-          <tr><td>Saturday</td><td>5:00am &ndash; 6:00pm</td></tr>
-          <tr><td>Sunday</td><td>By Appointment</td></tr>
-        </table>
-      </div>
-      <div class="info-blk">
-        <h4>Follow Us</h4>
-        <div style="display:flex;gap:12px;margin-top:4px">
-          <a href="https://www.instagram.com/revereautodetailing.tx/" target="_blank" class="si si-lg" title="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/people/Revere-Auto-Detail/100090432553786/" target="_blank" class="si si-lg" title="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
+      <div>
+        <div class="contact-phone-block">
+          <span class="contact-phone-label">Call or Text Anytime</span>
+          <a href="tel:9402084202" class="contact-phone-num">(940) 208-4202</a>
+          <span class="contact-phone-sub">Mon – Sat &nbsp;5am – 6pm &nbsp;·&nbsp; Sun by appt</span>
+        </div>
+        <div class="info-blk">
+          <h4>Email</h4>
+          <a href="mailto:revereautodetailing@gmail.com">revereautodetailing@gmail.com</a>
+        </div>
+        <div class="info-blk">
+          <h4>Service Area</h4>
+          <p>All of DFW — we come to you.<br/>Flower Mound, Southlake, Plano, Keller &amp; beyond.</p>
+        </div>
+        <div class="info-blk">
+          <h4>Follow</h4>
+          <div style="display:flex;gap:10px;margin-top:6px">
+            <a href="https://www.instagram.com/revereautodetailing.tx/" target="_blank" class="si" title="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/people/Revere-Auto-Detail/100090432553786/" target="_blank" class="si" title="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -848,6 +865,7 @@
         <input type="hidden" name="_captcha" value="false"/>
         <input type="hidden" name="_subject" value="New Booking Request — Revere Detailing"/>
         <h3>Request a Booking</h3>
+        <p style="font-size:13px;color:#888;margin-bottom:20px;margin-top:4px">Fill this out and Liam will get back to you within 24 hours.</p>
         <div class="form-row">
           <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="John" required/></div>
           <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith" required/></div>
@@ -860,13 +878,22 @@
         </div>
         <div class="fg"><label>Your City / Area</label><input type="text" name="location" placeholder="Southlake, TX"/></div>
         <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your vehicle and what you need..."></textarea></div>
-        <button type="submit" class="form-sub">Send Request</button>
-        <div class="form-ok" id="fOk">Request received — we'll reach out within 24 hours.</div>
+        <button type="submit" class="form-sub">Send Booking Request</button>
+        <div class="form-ok" id="fOk">✓ &nbsp;Request received — Liam will reach out within 24 hours.</div>
+        <p style="font-size:11px;color:#aaa;text-align:center;margin-top:14px;font-family:var(--cond);letter-spacing:1px">No spam. No obligations. Just great detailing.</p>
       </form>
     </div>
   </div>
-  <div class="map-wrap">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d429295.8!2d-97.0641!3d32.9579!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c27b0e2def14d%3A0x5c44ce19e2f94c75!2sDFW%20Metroplex%2C%20TX!5e0!3m2!1sen!2sus!4v1714500000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Revere Detailing Service Area — DFW"></iframe>
+  <div class="map-wrap" style="position:relative">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d429295.8!2d-97.0641!3d32.9579!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c27b0e2def14d%3A0x5c44ce19e2f94c75!2sDFW%20Metroplex%2C%20TX!5e0!3m2!1sen!2sus!4v1714500000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Revere Detailing Service Area — DFW" style="width:100%;height:100%;border:none;display:block;filter:grayscale(40%) brightness(0.9)"></iframe>
+    <!-- Overlay label -->
+    <div style="position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="background:rgba(0,0,0,0.78);border:1px solid rgba(201,168,76,0.35);padding:20px 36px;text-align:center;backdrop-filter:blur(4px)">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#C9A84C;margin-bottom:8px">Service Area</div>
+        <div style="font-family:'Orbitron',sans-serif;font-weight:800;font-size:clamp(14px,2vw,22px);color:#fff;text-transform:uppercase;letter-spacing:-0.3px;margin-bottom:6px">All of DFW &mdash; We Come To You</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:#888;text-transform:uppercase">Flower Mound · Southlake · Keller · Argyle · Lewisville<br/>Plano · McKinney · Frisco · Prosper &amp; Beyond</div>
+      </div>
+    </div>
   </div>
 </div><!-- /contact -->
 
@@ -944,12 +971,17 @@
     const lnk=document.getElementById('nl-'+id);if(lnk)lnk.classList.add('act');
     const curEl=document.getElementById(cur||id);
     curEl.classList.remove('visible');
+    const delay=id==='gallery'?220:160;
     setTimeout(()=>{
       PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
       window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
       const nxt=document.getElementById(id);nxt.classList.add('active');
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{nxt.classList.add('visible');busy=false}));
-    },160);
+      // Extra frames for gallery so columns reflow before fade-in
+      const frames=id==='gallery'?4:2;
+      let f=0;
+      function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
+      requestAnimationFrame(waitFrames);
+    },delay);
   }
   function toggleMenu(){document.getElementById('ham').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open')}
   function closeMenu(){document.getElementById('ham').classList.remove('open');document.getElementById('mobMenu').classList.remove('open')}
@@ -974,6 +1006,19 @@
   function moveSlide(d){goSlide(cur+d)}
   setInterval(()=>moveSlide(1),5800);
 
+  /* ── HERO SWIPE ── */
+  (function(){
+    const hero=document.querySelector('.hero');
+    let tx=0,ty=0,dragging=false;
+    hero.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;dragging=true},{passive:true});
+    hero.addEventListener('touchend',e=>{
+      if(!dragging)return;dragging=false;
+      const dx=e.changedTouches[0].clientX-tx;
+      const dy=e.changedTouches[0].clientY-ty;
+      if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40)moveSlide(dx<0?1:-1);
+    },{passive:true});
+  })();
+
   /* ── GALLERY ── */
   const GALLERY=[
     'IMG_7057.jpg','IMG_7058.jpg','IMG_7060.jpg','IMG_7062.jpg','IMG_7063.jpg',
@@ -985,6 +1030,7 @@
     'IMG_7107.jpg','IMG_7108.jpg','IMG_7109.jpg','IMG_7110.jpg','IMG_7111.jpg',
     'IMG_7112.jpg','IMG_7113.jpg','IMG_7114.jpg','IMG_7116.jpg','IMG_7117.jpg',
     'IMG_7118.jpg','IMG_7119.jpg','IMG_7120.jpg','IMG_7126.jpg',
+    'IMG_7079.jpg','IMG_7085.jpg','IMG_7093.jpg','IMG_7094.jpg','IMG_7095.jpg','IMG_7096.jpg',
   ];
   let galBuilt=false;
   function buildGal(){

@@ -54,8 +54,8 @@
     img{display:block;max-width:100%}
 
     /* ─ PAGE TRANSITIONS ─ */
-    .page{display:none;opacity:0;transition:opacity .16s ease}
-    .page.active{display:block}
+    .page{position:absolute;top:0;left:0;width:100%;opacity:0;pointer-events:none;transition:opacity .18s ease;visibility:hidden}
+    .page.active{position:relative;visibility:visible;pointer-events:auto}
     .page.visible{opacity:1}
 
     /* ══════════ NAV ══════════ */
@@ -993,13 +993,17 @@
     const lnk=document.getElementById('nl-'+id);if(lnk)lnk.classList.add('act');
     const curEl=document.getElementById(cur||id);
     curEl.classList.remove('visible');
-    const delay=id==='gallery'?350:160;
+    const delay=id==='gallery'?350:200;
     setTimeout(()=>{
-      PAGES.forEach(p=>document.getElementById(p).classList.remove('active'));
+      PAGES.forEach(p=>{
+        const el=document.getElementById(p);
+        el.classList.remove('active');
+        el.classList.remove('visible');
+      });
       window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
-      const nxt=document.getElementById(id);nxt.classList.add('active');
-      // Extra frames for gallery so columns reflow before fade-in
-      const frames=id==='gallery'?8:2;
+      const nxt=document.getElementById(id);
+      nxt.classList.add('active');
+      const frames=id==='gallery'?8:3;
       let f=0;
       function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
       requestAnimationFrame(waitFrames);
@@ -1090,6 +1094,16 @@
 
   buildGal();
   go('home');
+
+  // Preload key images after page load to reduce flash on tab switch
+  window.addEventListener('load',()=>{
+    const toPreload=[
+      'IMG_7070.jpg','IMG_7092.jpg', // home panels
+      'IMG_7082.jpg',                 // about
+      'IMG_7099.jpg','IMG_7083.jpg',  // services top
+    ];
+    toPreload.forEach(src=>{const i=new Image();i.src=src;});
+  });
 </script>
 </body>
 </html>

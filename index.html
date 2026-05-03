@@ -35,9 +35,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png"/>
   <!-- Preload first hero image for instant display -->
   <link rel="preload" as="image" href="IMG_7058.webp" fetchpriority="high"/>
-  <!-- Prefetch next slide images -->
+  <!-- Prefetch next slide + home page images -->
   <link rel="prefetch" as="image" href="IMG_7069.webp"/>
   <link rel="prefetch" as="image" href="IMG_7078.webp"/>
+  <link rel="prefetch" as="image" href="IMG_7092.webp"/>
+  <link rel="prefetch" as="image" href="IMG_7104.webp"/>
+  <link rel="prefetch" as="image" href="IMG_7086.webp"/>
+  <link rel="prefetch" as="image" href="IMG_7070.webp"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -658,7 +662,7 @@
   <!-- PILLAR STRIP -->
   <div class="pillar-strip">
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7078.webp" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7078.webp" alt="" aria-hidden="true" loading="eager"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Mobile Service</div>
@@ -667,7 +671,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7092.webp" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7092.webp" alt="" aria-hidden="true" loading="eager"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Est. 2020</div>
@@ -676,7 +680,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7104.webp" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7104.webp" alt="" aria-hidden="true" loading="eager"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Professional Grade</div>
@@ -685,7 +689,7 @@
       </div>
     </div>
     <div class="pillar">
-      <div class="pillar-bg"><img src="IMG_7086.webp" alt="" aria-hidden="true" loading="lazy"/></div>
+      <div class="pillar-bg"><img src="IMG_7086.webp" alt="" aria-hidden="true" loading="eager"/></div>
       <div class="pillar-overlay"></div>
       <div class="pillar-inner">
         <div class="pillar-tag">Protection</div>
@@ -698,11 +702,11 @@
   <!-- SERVICE PANELS -->
   <div class="svc-panels">
     <div class="svc-panel" onclick="go('services')">
-      <img src="IMG_7070.webp" alt="Interior Detailing" loading="lazy" style="object-position:center center"/>
+      <img src="IMG_7070.webp" alt="Interior Detailing" loading="eager" style="object-position:center center"/>
       <div class="svc-panel-inner"><div class="svc-line"></div><h3>Interior Detailing</h3><p>Explore Service</p></div>
     </div>
     <div class="svc-panel" onclick="go('services')">
-      <img src="IMG_7092.webp" alt="Exterior Detailing" loading="lazy" style="object-position:center 55%"/>
+      <img src="IMG_7092.webp" alt="Exterior Detailing" loading="eager" style="object-position:center 55%"/>
       <div class="svc-panel-inner"><div class="svc-line"></div><h3>Exterior Detailing</h3><p>Explore Service</p></div>
     </div>
   </div>
@@ -1098,7 +1102,6 @@
     busy=true;closeMenu();
     PAGES.forEach(p=>{const l=document.getElementById('nl-'+p);if(l)l.classList.remove('act')});
     const lnk=document.getElementById('nl-'+id);if(lnk)lnk.classList.add('act');
-    // Hide all pages instantly
     PAGES.forEach(p=>{
       const el=document.getElementById(p);
       el.classList.remove('visible');
@@ -1107,12 +1110,30 @@
     window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;
     const nxt=document.getElementById(id);
     nxt.classList.add('active');
+    // Update URL hash without triggering scroll
+    history.pushState(null,null,'#'+id);
     const frames=id==='gallery'?8:3;
     let f=0;
     function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
     requestAnimationFrame(waitFrames);
     setTimeout(updateFloat, 50);
   }
+  // Handle back/forward browser buttons
+  window.addEventListener('popstate',()=>{
+    const hash=location.hash.replace('#','');
+    const target=PAGES.includes(hash)?hash:'home';
+    go(target);
+  });
+  // On load/refresh, read hash and go to correct page
+  function initPage(){
+    const hash=location.hash.replace('#','');
+    const target=PAGES.includes(hash)?hash:'home';
+    // Set home as active base first, then navigate if different
+    document.getElementById('home').classList.add('active');
+    document.getElementById('home').classList.add('visible');
+    if(target!=='home') go(target);
+  }
+  initPage();
   function toggleMenu(){document.getElementById('ham').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open')}
   function closeMenu(){document.getElementById('ham').classList.remove('open');document.getElementById('mobMenu').classList.remove('open')}
 
@@ -1279,7 +1300,6 @@
   window.addEventListener('scroll',updateFloat,{passive:true});
 
   buildGal();
-  go('home');
 
   // Preload key images after page load to reduce flash on tab switch
   window.addEventListener('load',()=>{

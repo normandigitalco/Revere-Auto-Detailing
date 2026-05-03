@@ -116,7 +116,7 @@
     html{scroll-behavior:auto}
     body{background:var(--black);color:var(--off);font-family:var(--body);font-weight:300;line-height:1.6;overflow-x:hidden}
     ::selection{background:var(--red);color:#fff}
-    ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:#fff}::-webkit-scrollbar-thumb{background:var(--red)}
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
 
@@ -361,8 +361,8 @@
     .pr-price span{font-size:11px;font-weight:400;color:#999;letter-spacing:0}
 
     /* ══════════ GALLERY ══════════ */
-    .gal-grid{padding:32px;columns:3;column-gap:8px;will-change:transform}
-    .gal-item{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;border-radius:6px;aspect-ratio:3/4;background:#1a1a1a}
+    .gal-grid{padding:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;will-change:transform}
+    .gal-item{position:relative;overflow:hidden;cursor:pointer;border-radius:6px;aspect-ratio:3/4;background:#1a1a1a}
     .gal-item img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s;border-radius:6px}
     .gal-item:hover img{transform:scale(1.04)}
     .gal-ov{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s;border-radius:6px}
@@ -442,6 +442,23 @@
     .si.si-lg svg{width:24px;height:24px}
     .foot-bottom p{font-size:11px;color:#444;font-family:var(--cond);letter-spacing:2px}
 
+    /* ══════════ FLOATING BOOK NOW ══════════ */
+    .float-btn{
+      position:fixed;bottom:32px;right:32px;z-index:998;
+      font-family:var(--nav);font-weight:600;font-size:11px;letter-spacing:4px;text-transform:uppercase;
+      background:var(--red);color:#fff;border:none;cursor:pointer;
+      padding:16px 32px;border-radius:50px;
+      box-shadow:0 4px 24px rgba(201,168,76,0.35);
+      opacity:0;transform:translateY(12px);
+      transition:opacity .3s ease,transform .3s ease,background .2s,box-shadow .2s;
+      pointer-events:none;
+    }
+    .float-btn.show{opacity:1;transform:translateY(0);pointer-events:auto}
+    .float-btn:hover{background:var(--red2);box-shadow:0 6px 32px rgba(201,168,76,0.5)}
+    @media(max-width:768px){
+      .float-btn{bottom:20px;right:16px;padding:13px 24px;font-size:10px;letter-spacing:3px}
+    }
+
     /* ══════════ LIGHTBOX ══════════ */
     .lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.97);align-items:center;justify-content:center}
     .lb.open{display:flex}
@@ -461,6 +478,15 @@
       #s1 img{object-position:center 46%}  /* G-Wagon */
       #s2 img{object-position:center 67%}  /* GLE Sunset */
       #s3 img{object-position:center 66%}  /* Shelby */
+    }
+    @media(max-width:1024px){
+      .nav-links{gap:24px}
+      .nav-links li a{font-size:10px;letter-spacing:2px}
+      nav{padding:0 32px}
+    }
+    @media(max-width:880px){
+      .nav-links,.nav-cta{display:none}
+      .ham{display:flex}
     }
     @media(max-width:768px){
       :root{--nav-h:72px}
@@ -527,7 +553,7 @@
       .svc-feats li{font-size:13px}
       .pricing-box{padding:18px 16px}
 
-      .gal-grid{padding:12px;columns:2;column-gap:5px}
+      .gal-grid{padding:12px;grid-template-columns:repeat(2,1fr);gap:5px}
       .gal-item{margin-bottom:5px}
 
       .about-top{grid-template-columns:1fr}
@@ -595,6 +621,9 @@
   <a onclick="go('contact');closeMenu()">Contact</a>
 </div>
 
+<!-- FLOATING BOOK NOW -->
+<button class="float-btn" id="floatBtn" onclick="go('contact')">Book Now</button>
+
 <!-- ═══════════════ HOME ═══════════════ -->
 <div id="home" class="page">
 
@@ -610,12 +639,12 @@
       <img src="IMG_7078.webp" alt="Mercedes GLE Sunset" decoding="async" loading="lazy"/>
     </div>
     <div class="slide" id="s3">
-      <img src="IMG_7091.jpg" alt="Shelby GT500" decoding="async" loading="lazy"/>
+      <img src="IMG_7091.webp" alt="Shelby GT500" decoding="async" loading="lazy"/>
     </div>
     <div class="hero-content">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Mobile Auto Detailing &mdash; Flower Mound &amp; All of DFW</span></div>
       <h1 class="hero-title">Driven<br/>By<br/>Perfection.</h1>
-      <p class="hero-sub">Premium mobile detailing &mdash; we come to you</p>
+      <p class="hero-sub">Your driveway. Your schedule. Zero compromises.</p>
       <div class="hero-btns">
         <button class="btn-red" onclick="go('contact')">Book a Detail</button>
         <button class="btn-ghost" onclick="go('services')">View Services</button>
@@ -634,7 +663,7 @@
       <div class="pillar-inner">
         <div class="pillar-tag">Mobile Service</div>
         <h3>All of DFW</h3>
-        <p>Serving the entire Metroplex — from Flower Mound to McKinney, Southlake to Plano. We bring the detail shop to your driveway.</p>
+        <p>Flower Mound, Southlake, Plano, McKinney — wherever you are in DFW, Revere comes to you. No driving, no dropping off, no waiting.</p>
       </div>
     </div>
     <div class="pillar">
@@ -643,7 +672,7 @@
       <div class="pillar-inner">
         <div class="pillar-tag">Est. 2020</div>
         <h3>Proven Results</h3>
-        <p>Years of experience detailing everything from daily drivers to exotic supercars. Quality you can trust every time.</p>
+        <p>Every car gets the same attention. The work in the gallery speaks louder than anything we could say here.</p>
       </div>
     </div>
     <div class="pillar">
@@ -652,7 +681,7 @@
       <div class="pillar-inner">
         <div class="pillar-tag">Professional Grade</div>
         <h3>Premium Products</h3>
-        <p>Professional-grade chemicals, tools, and techniques on every job. No cutting corners — ever.</p>
+        <p>We don't cut corners on products. Every job uses professional-grade chemicals and equipment — because cheap products show up in the results.</p>
       </div>
     </div>
     <div class="pillar">
@@ -661,7 +690,7 @@
       <div class="pillar-inner">
         <div class="pillar-tag">Protection</div>
         <h3>Ceramic &amp; Graphene</h3>
-        <p>Industry-grade coatings that protect your vehicle's finish for years. Shield against UV, scratches, and road grime.</p>
+        <p>A coat that actually lasts. Ceramic and graphene coatings keep your paint protected and hydrophobic for years — not weeks.</p>
       </div>
     </div>
   </div>
@@ -709,7 +738,7 @@
       </div>
     </div>
     <div class="reviews-cta">
-      <p>Serving the entire DFW Metroplex &mdash; We come to you</p>
+      <p>Flower Mound, Southlake, Plano, Keller &mdash; all of DFW</p>
       <button class="btn-dark" onclick="go('contact')">Book Your Detail</button>
     </div>
   </div>
@@ -721,7 +750,7 @@
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>About Revere</span></div>
       <h2 class="sec-title">Mobile Care<br/>Done Right.</h2>
       <div class="divider"></div>
-      <p class="sec-body">Revere Detailing is a premium mobile auto detailing service serving the entire DFW Metroplex. We make high-end vehicles look their absolute best — on your schedule, at your location. From deep interior cleans to ceramic and graphene coatings, every service is performed with precision and care.</p>
+      <p class="sec-body">Revere Detailing is a professional mobile auto detailing service serving the entire DFW Metroplex. From deep interior cleans to ceramic and graphene coatings, every service is performed with professional-grade products at your location — no drop-offs, no shop fees, no compromises.</p>
       <button class="btn-ghost" onclick="go('about')" style="margin-top:28px;align-self:flex-start">Our Story</button>
     </div>
   </div>
@@ -734,17 +763,17 @@
       <div class="why-card">
         <span class="why-num">01</span>
         <div class="why-rule"></div>
-        <h3>We Come To You</h3><p>No drop-offs, no waiting rooms. We bring professional-grade equipment directly to your driveway — saving you time without sacrificing quality.</p>
+        <h3>We Come To You</h3><p>Book it, pick a time, and we show up. Your car gets detailed in your driveway while you handle your day — no drop-offs, no sitting in a waiting room.</p>
       </div>
       <div class="why-card">
         <span class="why-num">02</span>
         <div class="why-rule"></div>
-        <h3>Premium Products</h3><p>We use professional-grade chemicals and tools on every job. Your vehicle deserves the best — and that's exactly what we bring every time.</p>
+        <h3>No Shortcuts</h3><p>Every product we use is professional grade. Not because it sounds good on a website — because cheap products show up in the results, and that's not something we're willing to put our name on.</p>
       </div>
       <div class="why-card">
         <span class="why-num">03</span>
         <div class="why-rule"></div>
-        <h3>Nothing Missed</h3><p>From wheel wells to the headliner, we treat every vehicle like it's our own — because your satisfaction is our reputation.</p>
+        <h3>Nothing Missed</h3><p>Door jambs, vents, the gap between your seats — we get into everything. If it's dirty and it's in your car, we're cleaning it.</p>
       </div>
     </div>
   </div>
@@ -773,13 +802,13 @@
   <!-- FEATURED -->
   <div class="featured">
     <div class="feat-bg">
-      <img src="IMG_7111.jpg" alt="Paint Correction Detail" loading="lazy"/>
+      <img src="IMG_7111.webp" alt="Paint Correction Detail" loading="lazy"/>
       <div style="position:absolute;inset:0;background:rgba(0,0,0,0.83)"></div>
     </div>
     <div class="feat-content">
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Featured Service</span></div>
       <h2 class="sec-title">Ceramic &amp;<br/>Graphene<br/>Coatings.</h2>
-      <p class="sec-body">Protect your vehicle's paint with long-lasting, hydrophobic ceramic or graphene coatings. Shield against UV, contaminants, and daily wear — all while maintaining a deep, mirror-like finish that turns heads.</p>
+      <p class="sec-body">Ceramic and graphene coatings aren't a luxury — they're the smartest thing you can do for a car you actually care about. One application protects your paint for years, repels water and contaminants, and keeps that deep gloss without constant upkeep.</p>
       <button class="btn-red" onclick="go('services')" style="margin-top:32px">See Packages</button>
     </div>
   </div>
@@ -794,7 +823,7 @@
       <div class="eyebrow"><div class="eyebrow-bar"></div><span>Our Story</span></div>
       <h1 class="sec-title">Who<br/>We Are.</h1>
       <div class="divider"></div>
-      <p class="sec-body">Revere Detailing is a professional mobile auto detailing service built on a simple standard — every vehicle deserves expert care, delivered with convenience. We bring premium products, proven techniques, and genuine attention to detail directly to your driveway. Our goal is straightforward: leave every vehicle cleaner, better protected, and looking its absolute best.</p>
+      <p class="sec-body">Revere is a mobile detailing service built around one thing — results. Every vehicle gets the same level of attention. No shop markup, no shortcuts. Just professional-grade work done at your location, on your schedule.</p>
     </div>
     <div class="about-top-img"><img src="IMG_7088.webp" alt="Exotic Sports Car" loading="lazy" style="object-position:center 80%"/></div>
   </div>
@@ -805,24 +834,24 @@
       <div class="val">
         <span class="val-num">01</span>
         <div class="val-rule"></div>
-        <h3>Precision</h3><p>Every detail matters. We approach each vehicle with meticulous care, ensuring nothing is overlooked from carpet fibers to the outermost paint surface.</p>
+        <h3>Precision</h3><p>The details that most people skip are the ones we pay closest attention to. If you look close enough to notice it, we've already cleaned it.</p>
       </div>
       <div class="val">
         <span class="val-num">02</span>
         <div class="val-rule"></div>
-        <h3>Convenience</h3><p>Your time is valuable. We bring professional-grade equipment directly to your home or office — no drop-offs, no waiting, no hassle.</p>
+        <h3>Convenience</h3><p>We built this around your schedule, not ours. Show up, do the work, leave — no appointments that turn into all-day waits, no upsells at the counter.</p>
       </div>
       <div class="val">
         <span class="val-num">03</span>
         <div class="val-rule"></div>
-        <h3>Quality</h3><p>We use only professional-grade products and proven techniques. No shortcuts, no compromises. The result speaks for itself every single time.</p>
+        <h3>Quality</h3><p>We only use products worth using. The difference between a good detail and a great one almost always comes down to what's in the bucket.</p>
       </div>
     </div>
   </div>
   <div style="background:var(--dark2);padding:96px 80px;border-top:var(--border)">
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>Ready to Book?</span></div>
-    <h2 class="sec-title">Let's Make<br/>Your Vehicle<br/>Shine.</h2>
-    <p class="sec-body">Serving the entire DFW Metroplex. Mobile service — we come to you.</p>
+    <h2 class="sec-title">Let's Make<br/>Your Vehicle<br/>Look Right.</h2>
+    <p class="sec-body">Anywhere in DFW. We come to you.</p>
     <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:32px">
       <button class="btn-red" onclick="go('contact')">Book a Detail</button>
       <button class="btn-ghost" onclick="go('services')">View Services</button>
@@ -836,11 +865,11 @@
   <div class="page-hero">
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>What We Offer</span></div>
     <h1 class="sec-title">Our Services.</h1>
-    <p class="sec-body">Professional mobile detailing for every vehicle. All services performed at your location throughout the DFW Metroplex.</p>
+    <p class="sec-body">Every service is done at your location — no drop-offs, no shop fees. Prices vary by vehicle size and condition, so if you're unsure what you need, just reach out.</p>
   </div>
   <div class="svc-blocks">
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7099.jpg" alt="Express Exterior" loading="lazy" style="object-position:center 92%"/></div>
+      <div class="svc-photo"><img src="IMG_7099.webp" alt="Express Exterior" loading="lazy" style="object-position:center 92%"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Exterior Service</span></div>
         <h2>Express Exterior</h2>
@@ -862,7 +891,7 @@
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Most Popular</span></div>
         <h2>Standard Package</h2>
-        <p style="font-size:14px;color:#444;margin-bottom:18px">Complete inside &amp; out — the most popular choice for a full refresh.</p>
+        <p style="font-size:14px;color:#444;margin-bottom:18px">The most popular choice — inside and out. Good for anyone who wants a real reset without going full correction.</p>
         <ul class="svc-feats"><li>Full exterior wash</li><li>Wheel &amp; tire service</li><li>Full interior vacuum</li><li>Windows in &amp; out</li><li>Leather &amp; trim cleaned</li><li>Sealant applied</li><li>Door jambs dried</li><li>Scent applied</li></ul>
         <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Sedan / Coupe</span><span class="pr-price">$180</span></div><div class="pr"><span class="pr-label">Mid-Size SUV</span><span class="pr-price">$215</span></div><div class="pr"><span class="pr-label">Full-Size SUV / Truck</span><span class="pr-price">$255</span></div></div></div>
       </div>
@@ -872,17 +901,17 @@
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Premium Service</span></div>
         <h2>Premium Package</h2>
-        <p style="font-size:14px;color:#444;margin-bottom:18px">The full Revere experience — deep cleaning with protection for a showroom result.</p>
+        <p style="font-size:14px;color:#444;margin-bottom:18px">For the cars that deserve more than a wash. Deep cleaned, decontaminated, and protected — this is what Revere does best.</p>
         <ul class="svc-feats"><li>Everything in Standard</li><li>Engine bay cleaning</li><li>Clay bar treatment</li><li>Paint decontamination</li><li>Hand wax / sealant</li><li>Interior conditioning</li><li>Premium tire dressing</li><li>Odor elimination</li></ul>
         <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Sedan / Coupe</span><span class="pr-price">$280</span></div><div class="pr"><span class="pr-label">Mid-Size SUV</span><span class="pr-price">$320</span></div><div class="pr"><span class="pr-label">Full-Size SUV / Truck</span><span class="pr-price">$375</span></div></div></div>
       </div>
     </div>
     <div class="svc-block">
-      <div class="svc-photo"><img src="IMG_7095.jpg" alt="Paint Correction" loading="lazy" style="object-position:center 60%"/></div>
+      <div class="svc-photo"><img src="IMG_7095.webp" alt="Paint Correction" loading="lazy" style="object-position:center 60%"/></div>
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Paint Services</span></div>
         <h2>Paint Correction</h2>
-        <p style="font-size:14px;color:#444;margin-bottom:18px">Remove swirl marks, scratches, water spots, and oxidation — restore your paint's true depth.</p>
+        <p style="font-size:14px;color:#444;margin-bottom:18px">Swirl marks, water spots, light scratches — most of what makes paint look dull can be fixed. This is where the real transformation happens.</p>
         <ul class="svc-feats"><li>Single-stage correction</li><li>Two-stage correction</li><li>Swirl mark removal</li><li>Water spot removal</li><li>Light scratch removal</li><li>Paint depth tested</li></ul>
         <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">Single Stage</span><span class="pr-price">$350</span></div><div class="pr"><span class="pr-label">Two Stage</span><span class="pr-price">$550</span></div><div class="pr"><span class="pr-label">Full Correction</span><span class="pr-price" style="font-size:13px">Contact Us</span></div></div></div>
       </div>
@@ -892,7 +921,7 @@
       <div class="svc-info">
         <div class="eyebrow"><div class="eyebrow-bar"></div><span>Coating Services</span></div>
         <h2>Ceramic &amp;<br/>Graphene</h2>
-        <p style="font-size:14px;color:#444;margin-bottom:18px">Industry-grade coatings delivering a hydrophobic, self-cleaning surface that protects your investment for years.</p>
+        <p style="font-size:14px;color:#444;margin-bottom:18px">If you're going to spend money on your car's paint, spend it here. A proper coating outlasts any wax, makes maintenance dramatically easier, and keeps that just-detailed look for years.</p>
         <ul class="svc-feats"><li>Full paint coating</li><li>Wheel coating</li><li>Glass coating</li><li>Interior coating</li><li>Graphene upgrade</li><li>Multi-year protection</li></ul>
         <div class="pricing-box"><div class="pricing-box-header"><span class="pricing-box-label">Pricing Starts At</span></div><div class="pricing-tiers"><div class="pr"><span class="pr-label">1-Year Ceramic</span><span class="pr-price">$499</span></div><div class="pr"><span class="pr-label">3-Year Ceramic</span><span class="pr-price">$799</span></div><div class="pr"><span class="pr-label">Graphene Coating</span><span class="pr-price">$999<span>+</span></span></div></div></div>
       </div>
@@ -901,7 +930,7 @@
   <div style="background:var(--dark2);padding:96px 80px;border-top:var(--border)">
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>Keep It Perfect</span></div>
     <h2 class="sec-title">Maintenance Plans.</h2>
-    <p class="sec-body">Monthly, bi-monthly, and quarterly plans tailored to your schedule and budget.</p>
+    <p class="sec-body">Monthly, bi-monthly, or quarterly — keep your car looking the way it did the day after a detail. Plans are flexible and built around what actually makes sense for your vehicle and how you drive it.</p>
     <button class="btn-red" onclick="go('contact')" style="margin-top:28px">Inquire About Plans</button>
   </div>
 </div><!-- /services -->
@@ -923,7 +952,7 @@
   <div class="contact-top">
     <div class="eyebrow"><div class="eyebrow-bar"></div><span>Get In Touch</span></div>
     <h1 class="sec-title">Book a Detail.</h1>
-    <p class="sec-body">Premium mobile detailing, brought directly to your door. Fill out the form or give us a call.</p>
+    <p class="sec-body">Fill out the form and we'll get back to you within 24 hours.</p>
   </div>
   <div class="contact-body">
     <div class="contact-left">
@@ -962,7 +991,7 @@
         <input type="hidden" name="_captcha" value="false"/>
         <input type="hidden" name="_subject" value="New Booking Request — Revere Detailing"/>
         <h3>Request a Booking</h3>
-        <p style="font-size:13px;color:#888;margin-bottom:20px;margin-top:4px">Fill this out and Liam will get back to you within 24 hours.</p>
+        <p style="font-size:13px;color:#888;margin-bottom:20px;margin-top:4px">Fill this out and we'll get back to you within 24 hours.</p>
         <div class="form-row">
           <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="John" required/></div>
           <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith" required/></div>
@@ -976,8 +1005,8 @@
         <div class="fg"><label>Your City / Area</label><input type="text" name="location" placeholder="Southlake, TX"/></div>
         <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your vehicle and what you need..."></textarea></div>
         <button type="submit" class="form-sub">Send Booking Request</button>
-        <div class="form-ok" id="fOk">✓ &nbsp;Request received — Liam will reach out within 24 hours.</div>
-        <p style="font-size:11px;color:#aaa;text-align:center;margin-top:14px;font-family:var(--cond);letter-spacing:1px">No spam. No obligations. Just great detailing.</p>
+        <div class="form-ok" id="fOk">✓ &nbsp;Request received — we'll reach out within 24 hours.</div>
+        <p style="font-size:11px;color:#aaa;text-align:center;margin-top:14px;font-family:var(--cond);letter-spacing:1px">We typically respond same day.</p>
       </form>
     </div>
   </div>
@@ -1082,6 +1111,7 @@
     let f=0;
     function waitFrames(){if(++f<frames)requestAnimationFrame(waitFrames);else{nxt.classList.add('visible');busy=false;}}
     requestAnimationFrame(waitFrames);
+    setTimeout(updateFloat, 50);
   }
   function toggleMenu(){document.getElementById('ham').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open')}
   function closeMenu(){document.getElementById('ham').classList.remove('open');document.getElementById('mobMenu').classList.remove('open')}
@@ -1123,24 +1153,96 @@
 
   /* ── GALLERY ── */
   const GALLERY=[
-    'IMG_7057.webp','IMG_7058.webp','IMG_7060.webp','IMG_7062.webp','IMG_7063.webp',
-    'IMG_7064.webp','IMG_7067.webp','IMG_7069.webp','IMG_7070.webp','IMG_7071.webp',
-    'IMG_7072.webp','IMG_7074.webp','IMG_7075.webp','IMG_7077.webp','IMG_7078.webp',
-    'IMG_7081.webp','IMG_7082.webp','IMG_7083.webp','IMG_7084.webp','IMG_7086.webp',
-    'IMG_7088.webp','IMG_7090.webp','IMG_7091.jpg','IMG_7092.webp','IMG_7099.jpg',
-    'IMG_7100.jpg','IMG_7101.jpg','IMG_7102.jpg','IMG_7103.jpg','IMG_7104.webp',
-    'IMG_7107.jpg','IMG_7108.jpg','IMG_7109.jpg','IMG_7110.jpg','IMG_7111.jpg',
-    'IMG_7112.jpg','IMG_7113.jpg','IMG_7114.jpg','IMG_7116.jpg','IMG_7117.jpg',
-    'IMG_7118.jpg','IMG_7119.jpg','IMG_7120.jpg','IMG_7126.jpg',
-    'IMG_7079.webp','IMG_7085.webp','IMG_7093.jpg','IMG_7094.jpg','IMG_7095.jpg','IMG_7096.jpg',
+    // Row 1
+    'IMG_7058.webp','IMG_7092.webp','IMG_7069.webp',
+    // Row 2
+    'IMG_7077.webp','IMG_7074.webp','IMG_7070.webp',
+    // Row 3
+    'IMG_7095.webp','IMG_7086.webp','IMG_7119.webp',
+    // Row 4
+    'IMG_7075.webp','IMG_7078.webp','IMG_7079.webp',
+    // Row 5 (was row 16)
+    'IMG_7112.webp','IMG_7113.webp','IMG_7114.webp',
+    // Row 6
+    'IMG_7085.webp','IMG_7088.webp','IMG_7090.webp',
+    // Row 7
+    'IMG_7081.webp','IMG_7082.webp','IMG_7084.webp',
+    // Row 8 (was row 5)
+    'IMG_7116.webp','IMG_7117.webp','IMG_7118.webp',
+    // Row 9
+    'IMG_7062.webp','IMG_7071.webp','IMG_7072.webp',
+    // Row 10
+    'IMG_7096.webp','IMG_7099.webp','IMG_7100.webp',
+    // Row 11
+    'IMG_7060.webp','IMG_7057.webp','IMG_7083.webp',
+    // Row 12
+    'IMG_7067.webp','IMG_7063.webp','IMG_7064.webp',
+    // Remaining
+    'IMG_7091.webp','IMG_7093.webp','IMG_7094.webp',
+    'IMG_7101.webp','IMG_7102.webp','IMG_7103.webp',
+    'IMG_7104.webp','IMG_7107.webp','IMG_7108.webp',
+    'IMG_7109.webp','IMG_7110.webp','IMG_7111.webp',
+    'IMG_7120.webp','IMG_7126.webp',
   ];
+  const GAL_ALTS={
+    'IMG_7058.webp':'Black Porsche 911 exterior detail Flower Mound TX',
+    'IMG_7069.webp':'White Mercedes G-Wagon exterior detail DFW',
+    'IMG_7091.webp':'Matte black Shelby GT500 detail Flower Mound TX',
+    'IMG_7086.webp':'Mercedes GLE Coupe sunset detail DFW',
+    'IMG_7078.webp':'Grey Mercedes GLE Coupe exterior detail DFW',
+    'IMG_7107.webp':'White Corvette C8 Z06 mobile detail DFW',
+    'IMG_7112.webp':'Grey Corvette C8R yellow stripe detail DFW',
+    'IMG_7099.webp':'Red Chevrolet Camaro ZL1 exterior detail DFW',
+    'IMG_7084.webp':'Black Mercedes GLC Coupe detail DFW',
+    'IMG_7088.webp':'Exotic sports car exterior detail DFW',
+    'IMG_7060.webp':'Audi RS Q8 foam bath exterior detail DFW',
+    'IMG_7113.webp':'Corvette C8R front detail mobile detailing DFW',
+    'IMG_7100.webp':'White Cadillac Escalade exterior detail DFW',
+    'IMG_7070.webp':'Luxury vehicle interior detail DFW',
+    'IMG_7114.webp':'Blue BMW M3 exterior detail night DFW',
+    'IMG_7071.webp':'White Ford Bronco Raptor detail DFW',
+    'IMG_7101.webp':'Black Cadillac Escalade exterior detail DFW',
+    'IMG_7083.webp':'Standard detail package mobile detailing DFW',
+    'IMG_7108.webp':'BMW M3 interior leather detail DFW',
+    'IMG_7072.webp':'Grey Ford Bronco lifted exterior detail DFW',
+    'IMG_7102.webp':'Black Cadillac Escalade front detail DFW',
+    'IMG_7085.webp':'Mercedes paint correction detail close up DFW',
+    'IMG_7074.webp':'Ford Bronco wheel tire detail DFW',
+    'IMG_7109.webp':'BMW M3 rear seat interior detail DFW',
+    'IMG_7103.webp':'White Cadillac Escalade dusk exterior detail DFW',
+    'IMG_7075.webp':'Blue Lamborghini Urus exterior detail DFW',
+    'IMG_7110.webp':'Corvette C8R foam wash mobile detailing DFW',
+    'IMG_7057.webp':'Audi RS Q8 foam wash exterior detail DFW',
+    'IMG_7077.webp':'Blue Lamborghini Urus front detail DFW',
+    'IMG_7111.webp':'Paint correction detail close up DFW',
+    'IMG_7062.webp':'Blue Ford Super Duty lifted exterior detail DFW',
+    'IMG_7116.webp':'Audi RS Q8 foam bath mobile detail DFW',
+    'IMG_7079.webp':'Mercedes interior detail leather DFW',
+    'IMG_7117.webp':'Classic red truck paint correction detail DFW',
+    'IMG_7063.webp':'Blue Ford Super Duty lifted front detail DFW',
+    'IMG_7118.webp':'Black Ford Super Duty lifted exterior detail DFW',
+    'IMG_7081.webp':'Ford truck interior detail clean DFW',
+    'IMG_7119.webp':'Red Ford Raptor side profile detail DFW',
+    'IMG_7082.webp':'Luxury vehicle exterior detail DFW',
+    'IMG_7120.webp':'Red Ford Raptor front exterior detail DFW',
+    'IMG_7064.webp':'Ford Super Duty interior clean detail DFW',
+    'IMG_7126.webp':'Black Chevrolet Colorado lifted exterior detail DFW',
+    'IMG_7067.webp':'Pink Ford Bronco exterior detail DFW',
+    'IMG_7090.webp':'Mercedes AMG wheel detail mobile detailing DFW',
+    'IMG_7092.webp':'Porsche 911 Turbo S red interior detail DFW',
+    'IMG_7093.webp':'Porsche 911 Turbo S convertible rear detail DFW',
+    'IMG_7094.webp':'Porsche 911 black wheel brake detail DFW',
+    'IMG_7095.webp':'Paint correction mobile detailing DFW',
+    'IMG_7096.webp':'Wheel foam wash mobile detail DFW',
+    'IMG_7104.webp':'Audi RS Q8 exterior detail DFW',
+  };
   let galBuilt=false;
   function buildGal(){
     if(galBuilt)return;galBuilt=true;
     const g=document.getElementById('galGrid');
     GALLERY.forEach((src,i)=>{
       const item=document.createElement('div');item.className='gal-item';item.onclick=()=>openLb(i);
-      const el=document.createElement('img');el.src=src;el.alt='Revere Detailing';el.loading='lazy';el.decoding='async';
+      const el=document.createElement('img');el.src=src;el.alt=GAL_ALTS[src]||'Revere Detailing mobile auto detail DFW';el.loading='lazy';el.decoding='async';
       const ov=document.createElement('div');ov.className='gal-ov';
       item.appendChild(el);item.appendChild(ov);g.appendChild(item);
     });
@@ -1166,6 +1268,16 @@
     }catch{btn.textContent='Error — Try Again';btn.disabled=false}
   }
 
+  /* ── FLOATING BOOK NOW ── */
+  const floatBtn=document.getElementById('floatBtn');
+  function updateFloat(){
+    const onContact=document.getElementById('contact').classList.contains('active');
+    const scrolled=window.scrollY>300;
+    if(scrolled&&!onContact){floatBtn.classList.add('show')}
+    else{floatBtn.classList.remove('show')}
+  }
+  window.addEventListener('scroll',updateFloat,{passive:true});
+
   buildGal();
   go('home');
 
@@ -1174,7 +1286,7 @@
     const toPreload=[
       'IMG_7070.webp','IMG_7092.webp', // home panels
       'IMG_7082.webp',                 // about
-      'IMG_7099.jpg','IMG_7083.webp',  // services top
+      'IMG_7099.webp','IMG_7083.webp',  // services top
     ];
     toPreload.forEach(src=>{const i=new Image();i.src=src;});
   });
